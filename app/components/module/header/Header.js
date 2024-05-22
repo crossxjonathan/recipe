@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ImageProfile from '../image profile/image';
-import User from '../../../../public/assets/landing page/User Panel.svg';
+import User from '../../../../public/assets/auth/profilepng.png';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ThemeSwitch from '../../base/darkmode/darkmodetoggle';
@@ -33,7 +33,7 @@ const Header = () => {
           </li>
         </ul>
       </div>
-      <div className="flex absolute flex-row right-16">
+      <div className="flex absolute flex-row right-16 px-4 gap-2">
         <ImageProfile
           img={User}
         />
@@ -41,7 +41,7 @@ const Header = () => {
         <ToastContainer
           position='bottom-right'
         />
-        <div className='relative left-10'>
+        <div className='relative left-14'>
         <ThemeSwitch/>
         </div>
       </div>

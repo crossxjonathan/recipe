@@ -41,9 +41,9 @@ const Home = () => {
               <Image className="absolute bottom-5 left-80 cursor-pointer" src={Search} alt='Search' />
             </div>
           </div>
-          <div className='absolute left-1/2 top-10'>
-            <Image className="absolute bottom-28 left-16 w-128 h-128" src={Lettuce} alt="MainImage" />
-            <Image className="relative w-144 h-144 right-10 top-16" src={MainImage} alt="MainImage" />
+          <div className='relative right-28 z-0'>
+            <Image className="relative left-16 w-96 h-96" src={Lettuce} alt="MainImage" />
+            <Image className="relative w-144 h-144 right-10 bottom-64" src={MainImage} alt="MainImage" />
           </div>
         </div>
       </div>

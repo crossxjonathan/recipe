@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ImageProfile from '../image profile/image';
-import User from '../../../../public/assets/landing page/User Panel.svg';
+import User from '../../../../public/assets/auth/profilepng.png';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ThemeSwitch from '../../base/darkmode/darkmodetoggle';
@@ -33,11 +33,11 @@ const MainHeader = () => {
           </li>
         </ul>
       </div>
-      <div className="flex absolute flex-row right-16">
+      <div className="flex absolute flex-row right-16 cursor-pointer z-10">
         <ImageProfile
           img={User}
         />
-        <button onClick={handleLogout} className="px-10 absolute text-white text-nowrap">Log out</button>
+        {/* <button onClick={handleLogout} className="px-10 absolute text-white text-nowrap">Log out</button> */}
         <ToastContainer
           position='bottom-right'
         />
