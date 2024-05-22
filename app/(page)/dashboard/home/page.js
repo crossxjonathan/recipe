@@ -1,33 +1,34 @@
 import React from 'react';
 // import { Link } from "react-scroll/modules";
-import Textfield from './components/base/textfield/textfield';
-import Button from './components/base/button/button';
-import Header from './components/module/header/Header';
-import Footer from './components/module/footer/footer';
-import '../app/(page)/Layout.css';
+import Textfield from '@/app/components/base/textfield/textfield';
+import Button from '@/app/components/base/button/button';
+import Footer from '@/app/components/module/footer/footer';
+import '../../Layout.css';
 import Image from 'next/image';
-
-import MainImage from '../public/assets/landing page/landingpage food.svg';
-import Lettuce from '../public/assets/landing page/lettuce.svg';
-import Search from '../public/assets/landing page/search.png';
-import Popular1 from '../public/assets/landing page/popular 1.svg';
-import Popular2 from '../public/assets/landing page/popular 2.svg';
-import Popular3 from '../public/assets/landing page/healthy 1.svg';
-import ChickenKare from '../public/assets/landing page/chicken kare.svg';
-import BombChicken from '../public/assets/landing page/bomb chicken.svg';
-import CoffeLava from '../public/assets/landing page/coffe lava.svg';
-import IndiaSalad from '../public/assets/landing page/india salad.svg';
-import SugarSalmon from '../public/assets/landing page/sugar salmon.svg';
-import Banana from '../public/assets/landing page/Banana.svg';
-import BG from '../public/assets/landing page/BG.svg';
+import MainHeader from '@/app/components/module/header/MainHeader';
 
 
-const page = () => {
+import MainImage from '@/public/assets/landing page/landingpage food.svg';
+import Lettuce from '@/public/assets/landing page/lettuce.svg';
+import Search from '@/public/assets/landing page/search.png';
+import Popular1 from '@/public/assets/landing page/popular 1.svg';
+import Popular2 from '@/public/assets/landing page/popular 2.svg';
+import Popular3 from '@/public/assets/landing page/healthy 1.svg';
+import ChickenKare from '@/public/assets/landing page/chicken kare.svg';
+import BombChicken from '@/public/assets/landing page/bomb chicken.svg';
+import CoffeLava from '@/public/assets/landing page/coffe lava.svg';
+import IndiaSalad from '@/public/assets/landing page/india salad.svg';
+import SugarSalmon from '@/public/assets/landing page/sugar salmon.svg';
+import Banana from '@/public/assets/landing page/Banana.svg';
+import BG from '@/public/assets/landing page/BG.svg';
+
+
+const Home = () => {
   return (
     <div id="landingpage">
       <div className='header-container'>
         <div className='header-wrapper'>
-          <Header />
+          <MainHeader />
           <div className="absolute top-56 px-20">
             <h1 className="text-5xl font-semibold w-96 text-light-purple" >Discover Recipe & Delicious Food</h1>
             <div className='relative right-5'>
@@ -128,4 +129,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Home
