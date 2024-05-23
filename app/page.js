@@ -1,5 +1,6 @@
+"use client";
 import React from 'react';
-// import { Link } from "react-scroll/modules";
+import { Element, animateScroll as scroll, scroller } from "react-scroll";
 import Textfield from './components/base/textfield/textfield';
 import Button from './components/base/button/button';
 import Header from './components/module/header/Header';
@@ -46,7 +47,9 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white-cream flex flex-1 flex-row px-28">
+
+     <Element id='popularforyou'>
+     <div className="bg-white-cream flex flex-1 flex-row px-28">
         <div className='bg-light-yellow w-5 h-28'>
           <h1 className="text-4xl font-semibold py-10 px-10 w-96 text-light-purple" >Popular For You !</h1>
         </div>
@@ -63,6 +66,9 @@ const page = () => {
           <h1 className='text-3xl w-5 relative bottom-36 px-5 text-white-cream cursor-pointer hover:text-light-yellow'>King Burger</h1>
         </div>
       </div>
+     </Element>
+      
+      <Element id='newrecipe'>
       <div className="bg-white-cream flex flex-1 flex-row px-28">
         <div className='bg-light-yellow w-5 h-28'>
           <h1 className="text-4xl font-semibold py-10 px-10 w-96 text-gray-700" >New Recipe</h1>
@@ -84,6 +90,9 @@ const page = () => {
           />
         </div>
       </div>
+      </Element>
+
+      <Element id='popularrecipe'>
       <div className="bg-white-cream flex flex-1 flex-row px-28">
         <div className='bg-light-yellow w-5 h-28'>
           <h1 className="text-4xl font-semibold py-10 px-10 w-96 text-gray-800" >Popular Recipe</h1>
@@ -123,7 +132,11 @@ const page = () => {
           </div>
         </div>
       </div>
+      </Element>
+
+      <Element id='information'>
       <Footer />
+      </Element>
     </div>
   )
 }

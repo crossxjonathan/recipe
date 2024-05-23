@@ -13,8 +13,8 @@ const Footer = () => {
         <button className='text-light-purple hover:text-yellow-800 hover:font-semibold'>Learn More</button>
         <button className='text-light-purple hover:text-yellow-800 hover:font-semibold'>Get in Touch</button>
       </div>
-      <div className='flex justify-end'>
-        <p className='text-light-purple font-semibold'>Pijar Camp</p>
+      <div className='flex justify-end pr-5'>
+        <p className='text-light-purple'>Powered By <span className='font-semibold'>Pijar Camp</span></p>
       </div>
     </div>
   )

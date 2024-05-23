@@ -3,33 +3,33 @@
 import React from 'react';
 import ImageProfile from '../image profile/image';
 import User from '../../../../public/assets/auth/profilepng.png';
-import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ThemeSwitch from '../../base/darkmode/darkmodetoggle';
+import { toast } from 'react-toastify';
 
 
 const MainHeader = () => {
-  const handleLogout = () => {
-    toast.success("Good Bye....")
-    window.location.href = '/'
+  const handleHome = () => {
+    toast.loading("Please wait....")
+    window.location.href = '/dashboard/home'
   }
 
   return (
-    <header className="flex flex-row flex-1 px-16 py-10 justify-between font-semibold">
+    <header className="flex flex-row flex-1 px-16 py-10 justify-between font-semibold text-light-purple">
       <div className="flex flex-row gap-16">
         <ul>
           <li>
-            <button className='text-black'>Home</button>
+            <button onClick={handleHome} className='text-light-purple'>Home</button>
           </li>
         </ul>
         <ul>
           <li>
-            <button className='text-black text-nowrap'>Add Recipe</button>
+            <button className='text-light-purple text-nowrap'>Add Recipe</button>
           </li>
         </ul>
         <ul>
           <li>
-            <button className="text-black">Profile</button>
+            <button className="text-light-purple">Profile</button>
           </li>
         </ul>
       </div>
@@ -37,11 +37,7 @@ const MainHeader = () => {
         <ImageProfile
           img={User}
         />
-        {/* <button onClick={handleLogout} className="px-10 absolute text-white text-nowrap">Log out</button> */}
-        <ToastContainer
-          position='bottom-right'
-        />
-        <div className='relative left-10'>
+        <div className='relative py-3 left-10'>
         <ThemeSwitch/>
         </div>
       </div>

@@ -113,13 +113,12 @@ const RegisterPage = () => {
             onChange={handleChange}
           />
         </div>
-        <label className='checkbox-container flex flex-row py-5 px-20 gap-2'>
-          <div className='flex gap-5'>
-            <input type='checkbox' />
-            <span className='custom-checkbox'></span>
-            <p className='text-gray-400'>I agree to terms & conditions</p>
-          </div>
-        </label>
+        <div class="flex items-start py-5 px-20">
+            <div class="flex items-center h-5">
+                <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-light-yellow dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-yellow-600 dark:ring-offset-gray-800" required />
+            </div>
+              <label for="remember" class="ms-2 text-md font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-light-yellow hover:underline dark:text-yellow-500">terms and conditions</a>.</label>
+        </div>
         <div className='flex justify-center'>
           <Button
             type="submit"

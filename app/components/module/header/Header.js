@@ -37,11 +37,11 @@ const Header = () => {
         <ImageProfile
           img={User}
         />
-        <button onClick={handleLogin} className="px-10 absolute text-white">Login</button>
+        <button onClick={handleLogin} className="px-16 py-3 absolute text-white">Login</button>
         <ToastContainer
           position='bottom-right'
         />
-        <div className='relative left-14'>
+        <div className='relative py-2 left-14'>
         <ThemeSwitch/>
         </div>
       </div>
