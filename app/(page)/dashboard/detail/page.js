@@ -49,13 +49,16 @@ const DetailRecipe = () => {
               </div>
               <div>
                 <TextField
+                  id="comment"
+                  type="text"
+                  spellCheck={false}
                   placeholder="Comment:"
                   className="h-36 pb-28 px-5 text-gray-800 bg-white-blue"
                 />
               </div>
               <div className="flex justify-center py-5">
                 <Button
-                  className="bg-light-yellow w-72 rounded-md text-center text-white"
+                  className="bg-light-yellow w-72 rounded-lg text-center text-white"
                   type="submit"
                   name="Send"
                 />

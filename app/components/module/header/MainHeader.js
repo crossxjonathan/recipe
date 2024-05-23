@@ -14,6 +14,11 @@ const MainHeader = () => {
     window.location.href = '/dashboard/home'
   }
 
+  const handleAddRecipe = () => {
+    toast.loading("Please wait....")
+    window.location.href = '/dashboard/add-recipe'
+  }
+
   return (
     <header className="flex flex-row flex-1 px-16 py-10 justify-between font-semibold text-light-purple">
       <div className="flex flex-row gap-16">
@@ -24,7 +29,7 @@ const MainHeader = () => {
         </ul>
         <ul>
           <li>
-            <button className='text-light-purple text-nowrap'>Add Recipe</button>
+            <button onClick={handleAddRecipe} className='text-light-purple text-nowrap'>Add Recipe</button>
           </li>
         </ul>
         <ul>

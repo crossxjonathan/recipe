@@ -51,7 +51,7 @@ const page = () => {
      <Element id='popularforyou'>
      <div className="bg-white-cream flex flex-1 flex-row px-28">
         <div className='bg-light-yellow w-5 h-28'>
-          <h1 className="text-4xl font-semibold py-10 px-10 w-96 text-light-purple" >Popular For You !</h1>
+          <h1 className="text-4xl font-semibold py-10 px-10 w-96 text-light-purple">Popular For You !</h1>
         </div>
       </div>
       <div className="flex bg-white-cream ">
@@ -79,7 +79,7 @@ const page = () => {
           <div className='flex bg-light-yellow w-80 h-96 relative top-20' />
           <Image className="w-112 relative bottom-56 left-28" src={Popular3} alt='BG' />
         </div>
-        <div className='py-56 pr-20'>
+        <div className='py-32 pr-20'>
           <h1 className='text-4xl text-gray-600 font-medium w-96 py-2'>Healthy Bone Broth Ramen (Quick & Easy)</h1>
           <hr className='border-dark-green border-1 w-20'/>
           <p className='w-96 font-medium py-5 text-gray-500'>Quick + Easy Chicken Bone Broth Ramen- Healthy chicken ramen in a hurry? That’s right!</p>
@@ -115,6 +115,7 @@ const page = () => {
             </div>
             </div>
           </div>
+          
           <div className='flex flex-1 flex-row gap-10'>
            <div>
            <Image className='w-80' src={CoffeLava} alt='chicken kare'/>
