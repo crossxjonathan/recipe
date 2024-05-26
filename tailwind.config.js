@@ -91,6 +91,7 @@ module.exports = {
       colors: {
         'light-yellow':'#EFC81A',
         'white-cream':'#FFF5EC',
+        'white-blue':'#F6F5F4',
         'light-purple':'#2E266F',
         'dark-green':'#6F6A40',
         border: "hsl(var(--border))",
@@ -148,5 +149,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("daisyui")],
+  plugins: [require("tailwindcss-animate")],
 }

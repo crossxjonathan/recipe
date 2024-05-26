@@ -1,117 +1,186 @@
 /* AUTHENTICATION */
 
 #leftAuthentication {
-    width: 100%;
-    min-height: 100%;
+  width: 100%;
+  min-height: 100%;
 }
 
 #leftAuthentication .wrapAuth {
-    width: 100%;
+  width: 100%;
 }
 
 #leftAuthentication .wrapAuth .leftAuth {
-    flex: 1;
-    float: left;
-    width: 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    height: auto;
-    overflow: hidden;
+  flex: 1;
+  float: left;
+  width: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  height: auto;
+  overflow: hidden;
 }
 
 #leftAuthentication .wrapAuth .leftAuth::after {
-    content: "";
-    background-color: #EFC81A;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 70%;
+  content: "";
+  background-color: #EFC81A;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 70%;
 }
 
-#leftAuthentication .wrapAuth .leftAuth  .logo {
-    display: flex;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 1;
+#leftAuthentication .wrapAuth .leftAuth .logo {
+  display: flex;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
 }
 
+/* CHECKBOX */
 
 #rightAuthentication .checkbox-container {
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
 #rightAuthentication .checkbox-container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
 
 #rightAuthentication .custom-checkbox {
-    position: relative;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    background-color: #eee;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-  }
+  position: relative;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-color: #eee;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
 
-#rightAuthentication .checkbox-container input:checked + .custom-checkbox {
-    background-color: yellow;
-  }
+#rightAuthentication .checkbox-container input:checked+.custom-checkbox {
+  background-color: yellow;
+}
 
 #rightAuthentication .custom-checkbox::after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
+  content: "";
+  position: absolute;
+  display: none;
+}
 
-#rightAuthentication .checkbox-container input:checked + .custom-checkbox::after {
-    display: block;
-  }
+#rightAuthentication .checkbox-container input:checked+.custom-checkbox::after {
+  display: block;
+}
 
 #rightAuthentication .checkbox-container .custom-checkbox::after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid gray;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-  }
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid gray;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
 
 
 /* LANDING PAGE */
 #landingpage {
-    width: 100%;
-    min-height: 100%;
+  width: 100%;
+  min-height: 100%;
 }
 
 #landingpage .header-container {
-    width: 100%;
+  width: 100%;
 }
 
 #landingpage .header-container .header-wrapper {
+  display: flex;
+  height: 700px;
+  background: linear-gradient(to right,
+      #FFF5EC 0%,
+      #FFF5EC 70%,
+      #EFC81A 0%,
+      #EFC81A 30%);
+}
+
+#landingpage .grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, auto);
+  gap: 20px;
+  padding: 20px;
+}
+
+#landingpage .grid-item {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+
+@media (max-width: 700px) {
+  #MainHeader .rightHeader {
+  }
+}
+
+
+/* Login & Register Mobile */
+@media (max-width: 700px) {
+  #leftAuthentication {
+    display: none;
+  }  
+
+  #rightAuthentication {
+    padding: 20px;
+  }
+
+  #rightAuthentication .darkMode {
+    position: absolute;
+    right: 20px;
+  }
+
+  #rightAuthentication .logincontainer {
     display: flex;
-    height: 700px;
-    background: linear-gradient(
-        to right,
-        #FFF5EC 0%,
-        #FFF5EC 70%,
-        #EFC81A 0%,
-        #EFC81A 30%
-    );
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  #rightAuthentication .logincontainer h1,
+  #rightAuthentication .logincontainer p {
+    text-align: center;
+  }
+
+  #rightAuthentication .textfieldlogin {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  #rightAuthentication .textfieldlogin .textfield {
+    width: 100%;
+    left: 0;
+  }
+
+  #rightAuthentication .flex.items-start.py-5.px-20 {
+    justify-content: center;
+    padding: 0 20px;
+  }
+
+  #rightAuthentication .pl-96.py-5 {
+    text-align: center;
+    padding: 0;
+  }
 }
