@@ -25,7 +25,7 @@ const MainHeader = () => {
   }
 
   return (
-    <header className="flex flex-row flex-1 px-16 py-10 justify-between font-semibold text-light-purple">
+    <header className="flex flex-row flex-1 px-10 py-10 justify-between font-semibold text-light-purple">
       <div className="flex flex-row gap-16">
         <ul>
           <li>
@@ -43,11 +43,13 @@ const MainHeader = () => {
           </li>
         </ul>
       </div>
-      <div className="flex absolute flex-row right-16 cursor-pointer z-10">
+      <div className="flex absolute flex-row right-16 cursor-pointer">
+        <div className='relative bottom-2 left-10 z-10'>
         <ImageProfile
           img={User}
         />
-        <div className='relative py-3 left-10'>
+        </div>
+        <div className='relative py-1 left-10'>
         <ThemeSwitch/>
         </div>
       </div>

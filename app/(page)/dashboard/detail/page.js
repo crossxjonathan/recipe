@@ -1,6 +1,8 @@
+"use client";
+
 import Footer from '@/app/components/module/footer/footer';
 import MainHeader from '@/app/components/module/header/MainHeader';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Sandwich from '../../../../public/assets/detail recipe/detail recipe.svg';
 import VideoBtn from '@/app/components/base/button/videoBtn';
@@ -8,8 +10,47 @@ import TextField from './../../../components/base/textfield/textfield';
 import Button from '@/app/components/base/button/button';
 import Comment from '../../../../public/assets/detail recipe/comment.svg';
 import Profile from '../../../../public/assets/auth/profilepng.png';
+import Api from '@/app/configs/Api';
+import { useSearchParams } from 'next/navigation';
+import ImageDefault from '../../../../public/assets/landing page/imagedefault.png';
 
 const DetailRecipe = () => {
+  const [detail, setDetail] = useState(null);
+  const [error, setError] = useState('');
+  const searchParams = useSearchParams();
+
+const id = searchParams.get("id");
+
+// console.log("ID:", id);
+
+useEffect(() => {
+  const getData = async () => {
+    try {
+      const { data: res } = await Api.get(`/recipes/${id}`);
+      console.log(res.data, "<<<<<<<<<<<response");
+      setDetail(res.data);
+    } catch (error) {
+      console.error('Error fetching recipe details:', error);
+      setError('Failed to fetch recipe details.');
+    }
+  };
+  getData();
+}, [id]);
+
+if (error) {
+  return <div>{error}</div>;
+}
+
+if (!detail) {
+  return <div>Loading...</div>;
+}
+
+const { title, description, image } = detail;
+
+  console.log(detail, "<<<<<<result")
+  // console.log(detail.title, "<<<<<<<<<<<<<<<<title");
+  // console.log(detail.description, "<<<<<<<<<<<<<<<<description");
+
   return (
     <div id='detail-recipe'>
       <div className='header-wrapper'>
@@ -17,21 +58,16 @@ const DetailRecipe = () => {
       </div>
       <div>
         <div className='flex flex-1 justify-center py-5'>
-          <h1 className='text-4xl font-medium text-light-purple'>Sandwich with Boiled Egg</h1>
+          <h1 className='text-4xl font-medium text-light-purple'>{title}</h1>
         </div>
         <div className="grid flex-1 justify-center py-10">
-          <Image className="w-144" src={Sandwich} alt='Sandwich' />
-          <div className="py-5">
+          <div className="justify-center px-96">
+          <Image className="bg-light-yellow rounded-xl w-144" width={200} height={200} layout='responsive' src={image ? image : ImageDefault} alt='ImageId' />
+          </div>
+          <div className="py-5 px-96">
             <h1 className="text-2xl font-medium">Ingredients</h1>
             <div className="py-2">
-              <p>- 2 Eggs</p>
-              <p>- 2 Tbsp Mayonnaise</p>
-              <p>- 3 Slices Bread</p>
-              <p>- a Little Butter</p>
-              <p>- ⅓ Carton Of Cress</p>
-              <p>- 2-3 Slices Of Tomato Or A Lettuce Leaf
-                And A Slice Of Ham Or Cheese</p>
-              <p>- Crisps, To Serve</p>
+              <p>{description}</p>
             </div>
             <div className="py-5">
               <h1 className='text-2xl font-semibold py-5'>Video Step</h1>
@@ -49,16 +85,13 @@ const DetailRecipe = () => {
               </div>
               <div>
                 <TextField
-                  id="comment"
-                  type="text"
-                  spellCheck={false}
                   placeholder="Comment:"
                   className="h-36 pb-28 px-5 text-gray-800 bg-white-blue"
                 />
               </div>
               <div className="flex justify-center py-5">
                 <Button
-                  className="bg-light-yellow w-72 rounded-lg text-center text-white"
+                  className="bg-light-yellow w-72 rounded-md text-center text-white"
                   type="submit"
                   name="Send"
                 />

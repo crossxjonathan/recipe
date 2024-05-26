@@ -1,13 +1,14 @@
 'use client';
+
 import React, { useState } from 'react';
 
-const TextField = ({ label, type, id, placeholder, spellCheck, className, props, onChange, validate }) => {
-  const [value, setValue] = useState('');
+const TextField = ({ label, type, id, placeholder, spellCheck, className, onChange, validate, value, ...props }) => {
+  const [values, setValues] = useState('');
   const [status, setStatus] = useState('');
 
   const handleChange = (e) => {
     const newValue = e.target.value;
-    setValue(newValue);
+    setValues(newValue);
 
     let isValid = validate ? validate(newValue) : newValue.trim() !== '';
 
@@ -22,28 +23,29 @@ const TextField = ({ label, type, id, placeholder, spellCheck, className, props,
     }
   };
 
-  const borderColor = status === 'success' ? 'border-green-500' : status === 'failed' ? 'border-red-500' : 'border-gray-300';
-  const ringColor = status === 'success' ? 'ring-green-300' : status === 'failed' ? 'ring-red-300' : 'ring-yellow-300';
-  const textColor = status === 'success' ? 'text-green-300' : status === 'failed' ? 'text-red-300' : 'text-yellow-300';
+  const borderColor = status === 'success' ? 'border-green-800' : status === 'failed' ? 'border-red-800' : 'border-gray-300';
+  const ringColor = status === 'success' ? 'ring-green-500' : status === 'failed' ? 'ring-red-500' : 'ring-yellow-500';
+  const textColor = status === 'success' ? 'text-green-500' : status === 'failed' ? 'text-red-500' : 'text-yellow-500';
 
   return (
-    <form>
+    <form className="w-full">
       <div className="form-group grid items-center text-left space-x-4">
-        <label htmlFor={id} className="w-1/4 py-2 text-gray-500 px-14 text-nowrap">{label}</label>
+        <label htmlFor={id} className="w-1/4 py-2 text-gray-500 px-5 text-nowrap">{label}</label>
         <input
+          {...props}
           type={type}
           id={id}
           spellCheck={spellCheck}
+          values={values}
           required
           placeholder={placeholder}
-          className={`p-5 px-2 border ${borderColor} rounded focus:outline-none focus:ring-1 ${ringColor} ${className}`}
+          className={`p-5 px-2 border ${borderColor} rounded focus:outline-none focus:ring-1 ${ringColor} ${className} w-full sm:w-3/4`}
           value={value}
           onChange={handleChange}
-          {...props}
         />
       </div>
       {status && (
-        <p className={`${textColor} py-2 px-5`}>
+        <p className={`${textColor} py-2 px-5 text-start`}>
           {status === 'success' ? '' : 'Please Fill Out This Field'}
         </p>
       )}

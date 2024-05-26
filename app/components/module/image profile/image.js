@@ -12,6 +12,8 @@ const ImageProfile = ({ img }) => {
   }
 
   const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
     toast.success("Good Bye....")
     window.location.href = '/'
   }
