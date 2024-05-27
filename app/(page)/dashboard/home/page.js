@@ -7,8 +7,10 @@ import Footer from '@/app/components/module/footer/footer';
 import '../../Layout.css';
 import Image from 'next/image';
 import MainHeader from '@/app/components/module/header/MainHeader';
-import imageDefault from '../../../../public/assets/landing page/imagedefault.png';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+import imageDefault from '../../../../public/assets/landing page/imagedefault.png';
 import MainImage from '@/public/assets/landing page/landingpage food.svg';
 import Lettuce from '@/public/assets/landing page/lettuce.svg';
 import Search from '@/public/assets/landing page/search.png';
@@ -19,12 +21,14 @@ import BG from '@/public/assets/landing page/BG.svg';
 import Api from '@/app/configs/Api';
 import Card from '@/app/components/base/card/card';
 import { useRouter } from 'next/navigation';
+import { Pagination } from 'flowbite-react';
 
 const Home = () => {
   const router = useRouter();
   const [menu, setMenu] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [totalPages, setTotalPages] = useState(8);
 
   const handleDetailRecipe = (id) => {
     Api.get(`/recipes/${id}`)
@@ -34,22 +38,36 @@ const Home = () => {
       })
   };
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const handleSearch = (id) => {
+    Api.get(`/recipes/${id}`)
+    .then((res) => {
+      router.push(`/dashboard/find-recipe/?search=${searchTerm}`)
+      console.log(res, "<<<<<<<<<<<<<<<<<res id")
+    })
+  };
+
+
+  const handleChange = (e) => {
+    const {value} = e.target;
+    setSearchTerm(value);
+  };
+
   useEffect(() => {
-    Api.get('/recipes/', { params: { page: currentPage } })
+    Api.get('/recipes/', { params: { page: currentPage, limit: totalPages } })
       .then((res) => {
         const result = res.data.data;
         setMenu(result);
-        setTotalPages(res.data.meta?.totalPages ?? 1);
+        setTotalPages(res.data.meta?.totalPages ?? 8);
       })
       .catch((err) => {
         console.error(err);
+        setLoading(false);
       });
   }, [currentPage]);
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
 
   return (
     <div id="landingpage">
@@ -64,8 +82,10 @@ const Home = () => {
                 id="search"
                 placeholder="Search Recipe"
                 className="w-96 h-14"
+                value={searchTerm}
+                onChange={handleChange}
               />
-              <Image className="absolute bottom-5 left-80 cursor-pointer" src={Search} alt="Search" />
+              <Image onClick={handleSearch} className="absolute bottom-5 left-80 cursor-pointer" src={Search} alt="Search" />
             </div>
           </div>
           <div className="relative right-28 z-0">
@@ -133,30 +153,13 @@ const Home = () => {
               />
             ))}
           </div>
-          <div className="flex justify-center mt-5">
-            <Button
-              type="button"
-              name="Previous"
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="mx-2 text-center"
-            />
-            {totalPages && [...Array(totalPages)].map((_, index) => (
-              <Button
-                key={index}
-                type="button"
-                name={index + 1}
-                onClick={() => handlePageChange(index + 1)}
-                disabled={currentPage === index + 1}
-                className="mx-2 text-center"
-              />
-            ))}
-            <Button
-              type="button"
-              name="Next"
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="mx-2 text-center"
+          <div className="flex py-10 overflow-x-auto sm:justify-center">
+            <Pagination
+              layout="navigation"
+              currentPage={currentPage}
+              totalPages={100}
+              onPageChange={handlePageChange}
+              showIcons
             />
           </div>
         </div>

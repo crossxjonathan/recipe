@@ -54,7 +54,7 @@ const UpdateRecipe = () => {
     try {
       if (Id) {
         await Api.delete(`/recipes/${Id}`);
-        toast.success("Recipe deleted successfully!");
+        toast.success("deleted successfully!");
         Router.push('/dashboard/profile/my-recipe');
       } else {
         throw new Error("Recipe ID not found!");
@@ -129,8 +129,9 @@ const UpdateRecipe = () => {
           <Button
             className="bg-light-yellow w-72 text-center text-white rounded-lg"
             type="submit"
-            name="Post"
+            name={loading ? "Posting..." : "Post"}
             onClick={handleSubmit}
+            disabled={loading}
           />
         <FaTrash className="w-8 h-8 cursor-pointer" onClick={handleDelete}/>
         </div>
