@@ -1,9 +1,17 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const TextArea = ({ label, type, id, placeholder, spellCheck, className, onChange, validate, value, ...props }) => {
   const [status, setStatus] = useState('');
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [value]);
 
   const handleChange = (e) => {
     const newValue = e.target.value;
@@ -19,6 +27,11 @@ const TextArea = ({ label, type, id, placeholder, spellCheck, className, onChang
     if (onChange) {
       onChange(e);
     }
+
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
   };
 
   const borderColor = status === 'success' ? 'border-green-800' : status === 'failed' ? 'border-red-800' : 'border-gray-300';
@@ -31,11 +44,12 @@ const TextArea = ({ label, type, id, placeholder, spellCheck, className, onChang
         <label htmlFor={id} className="w-1/4 py-2 text-gray-500 px-5 text-nowrap">{label}</label>
         <textarea
           {...props}
+          ref={textareaRef}
           id={id}
           spellCheck={spellCheck}
           required
           placeholder={placeholder}
-          className={`p-5 px-2 border ${borderColor} rounded focus:outline-none focus:ring-1 ${ringColor} ${className} w-full sm:w-3/4`}
+          className={`p-5 px-2 border ${borderColor} rounded focus:outline-none focus:ring-1 ${ringColor} ${className} w-full sm:w-3/4 resize-none overflow-hidden`}
           value={value}
           onChange={handleChange}
         />

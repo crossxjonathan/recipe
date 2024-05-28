@@ -17,12 +17,14 @@ const UpdateRecipe = () => {
   const Router = useRouter();
   const searchParams = useSearchParams();
   const Id = searchParams.get('id');
-
+  
+  console.log(Id,"<<<<<<<<<<<ID UPDATE")
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [form, setForm] = useState({
     title: '',
-    description: ''
+    description: '',
+    image: ''
   });
 
   const handleChange = (e) => {
@@ -73,8 +75,9 @@ const UpdateRecipe = () => {
           const res = await Api.get(`/recipes/${Id}`);
           const result = res.data;
           setForm({
-            title: result.title,
-            description: result.description
+            title: form.title,
+            description: form.description,
+            image: form.image,
           });
         } catch (error) {
           console.log(error);
@@ -98,7 +101,20 @@ const UpdateRecipe = () => {
         <MainHeader />
       </div>
       <div className="grid justify-center py-10">
-        <AddPhoto />
+        {/* <AddPhoto /> */}
+        <TextField
+          id="image"
+          type="text"
+          value={form.image}
+          placeholder="Image URL"
+          onChange={handleChange}
+          className="text-gray-500 px-5 bg-white-blue font-semibold"
+        />
+        {form.image && (
+          <div>
+            <img src={form.image} alt="Uploaded Image" className="mt-3 w-64 h-64 object-cover" />
+          </div>
+        )}
         <div className="w-full mx-w-auto mx-auto py-5">
           <TextField
             id="title"
@@ -118,8 +134,6 @@ const UpdateRecipe = () => {
             spellCheck={false}
             onChange={handleChange}
             className="text-gray-500 pb-48 px-5 bg-white-blue font-semibold h-auto"
-            style={{ resize: 'none', overflowY: 'auto', height: 'auto' }}
-            textarea 
           />
         </div>
         <div className="py-10">
