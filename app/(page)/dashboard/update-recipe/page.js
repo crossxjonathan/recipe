@@ -101,7 +101,20 @@ const UpdateRecipe = () => {
         <MainHeader />
       </div>
       <div className="grid justify-center py-10">
-        <AddPhoto />
+        {/* <AddPhoto /> */}
+        <TextField
+          id="image"
+          type="text"
+          value={form.image}
+          placeholder="Image URL"
+          onChange={handleChange}
+          className="text-gray-500 px-5 bg-white-blue font-semibold"
+        />
+        {form.image && (
+          <div>
+            <img src={form.image} alt="Uploaded Image" className="mt-3 w-64 h-64 object-cover" />
+          </div>
+        )}
         <div className="w-full mx-w-auto mx-auto py-5">
           <TextField
             id="title"
