@@ -19,37 +19,31 @@ const DetailRecipe = () => {
   const [error, setError] = useState('');
   const searchParams = useSearchParams();
 
-const id = searchParams.get("id");
+  const id = searchParams.get("id");
 
-// console.log("ID:", id);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const { data: res } = await Api.get(`/recipes/${id}`);
+        console.log(res.data, "<<<<<<<<<<<response");
+        setDetail(res.data);
+      } catch (error) {
+        console.error('Error fetching recipe details:', error);
+        setError('Failed to fetch recipe details.');
+      }
+    };
+    getData();
+  }, [id]);
 
-useEffect(() => {
-  const getData = async () => {
-    try {
-      const { data: res } = await Api.get(`/recipes/${id}`);
-      console.log(res.data, "<<<<<<<<<<<response");
-      setDetail(res.data);
-    } catch (error) {
-      console.error('Error fetching recipe details:', error);
-      setError('Failed to fetch recipe details.');
-    }
-  };
-  getData();
-}, [id]);
+  if (error) {
+    return <div>{error}</div>;
+  }
 
-if (error) {
-  return <div>{error}</div>;
-}
+  if (!detail) {
+    return <div>Loading...</div>;
+  }
 
-if (!detail) {
-  return <div>Loading...</div>;
-}
-
-const { title, description, image } = detail;
-
-  console.log(detail, "<<<<<<result")
-  // console.log(detail.title, "<<<<<<<<<<<<<<<<title");
-  // console.log(detail.description, "<<<<<<<<<<<<<<<<description");
+  const { title, description, image } = detail;
 
   return (
     <div id='detail-recipe'>
@@ -62,7 +56,7 @@ const { title, description, image } = detail;
         </div>
         <div className="grid flex-1 justify-center py-10">
           <div className="justify-center px-96">
-          <Image className="bg-light-yellow rounded-xl w-144" width={200} height={200} layout='responsive' src={image ? image : ImageDefault} alt='ImageId' />
+            <Image className="bg-light-yellow rounded-xl w-144" width={200} height={200} layout='responsive' src={image ? image : ImageDefault} alt='ImageId' />
           </div>
           <div className="py-5 px-96">
             <h1 className="text-2xl font-medium">Ingredients</h1>
@@ -124,4 +118,4 @@ const { title, description, image } = detail;
   )
 }
 
-export default DetailRecipe
+export default DetailRecipe;

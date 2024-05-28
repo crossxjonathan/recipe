@@ -1,12 +1,13 @@
-import React, { Suspense } from 'react'
-import DetailRecipe from './page'
+import React, { Suspense } from 'react';
+import DetailRecipe from './page';
+import Loading from './loadingrecipe';
 
-const DetailRecipeWithSuspense = () => {
-    return (
-        <Suspense>
-            <DetailRecipe />
-        </Suspense>
-    )
-};
+const DetailRecipePage = () => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <DetailRecipe />
+    </Suspense>
+  );
+}
 
-export default DetailRecipeWithSuspense
+export default DetailRecipePage;
