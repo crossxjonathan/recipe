@@ -17,12 +17,14 @@ const UpdateRecipe = () => {
   const Router = useRouter();
   const searchParams = useSearchParams();
   const Id = searchParams.get('id');
-
+  
+  console.log(Id,"<<<<<<<<<<<ID UPDATE")
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [form, setForm] = useState({
     title: '',
-    description: ''
+    description: '',
+    image: ''
   });
 
   const handleChange = (e) => {
@@ -54,7 +56,7 @@ const UpdateRecipe = () => {
     try {
       if (Id) {
         await Api.delete(`/recipes/${Id}`);
-        toast.success("deleted successfully!");
+        toast.success("Recipe deleted successfully!");
         Router.push('/dashboard/profile/my-recipe');
       } else {
         throw new Error("Recipe ID not found!");
@@ -73,8 +75,9 @@ const UpdateRecipe = () => {
           const res = await Api.get(`/recipes/${Id}`);
           const result = res.data;
           setForm({
-            title: result.title,
-            description: result.description
+            title: form.title,
+            description: form.description,
+            image: form.image,
           });
         } catch (error) {
           console.log(error);
@@ -118,8 +121,6 @@ const UpdateRecipe = () => {
             spellCheck={false}
             onChange={handleChange}
             className="text-gray-500 pb-48 px-5 bg-white-blue font-semibold h-auto"
-            style={{ resize: 'none', overflowY: 'auto', height: 'auto' }}
-            textarea 
           />
         </div>
         <div className="py-10">
@@ -129,9 +130,8 @@ const UpdateRecipe = () => {
           <Button
             className="bg-light-yellow w-72 text-center text-white rounded-lg"
             type="submit"
-            name={loading ? "Posting..." : "Post"}
+            name="Post"
             onClick={handleSubmit}
-            disabled={loading}
           />
         <FaTrash className="w-8 h-8 cursor-pointer" onClick={handleDelete}/>
         </div>

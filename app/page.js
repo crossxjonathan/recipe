@@ -31,8 +31,9 @@ import { Pagination } from 'flowbite-react';
 const page = () => {
   const router = useRouter();
   const [menu, setMenu] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [totalPages, setTotalPages] = useState(8);
 
   const handleDetailRecipe = (id) => {
     Api.get(`/recipes/${id}`)
@@ -42,26 +43,40 @@ const page = () => {
       })
   };
 
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const handleSearch = () => {
+    Api.get(`/recipes?search=`)
+      .then((res) => {
+        router.push(`/dashboard/find-recipe/?search=${searchTerm}`)
+        console.log(res, "<<<<<<<<<<<<<<<<<res search")
+      })
+  };
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setSearchTerm(value);
+  };
+
+
   useEffect(() => {
-    Api.get('/recipes/', { params: { page: currentPage } })
+    Api.get('/recipes/', { params: { page: currentPage, limit: totalPages } })
       .then((res) => {
         const result = res.data.data;
         setMenu(result);
-        setTotalPages(res.data.meta?.totalPages ?? 1);
+        setTotalPages(res.data.meta?.totalPages ?? 8);
       })
       .catch((err) => {
         console.error(err);
       });
   }, [currentPage]);
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
   return (
     <div id="landingpage">
-      <div className='header-container'>
-        <div className='header-wrapper'>
+      <div className="header-container">
+        <div className="header-wrapper">
           <Header />
           <div className="absolute top-56 px-20">
             <h1 className="text-5xl font-semibold w-96 text-light-purple">Discover Recipe & Delicious Food</h1>
@@ -71,8 +86,10 @@ const page = () => {
                 id="search"
                 placeholder="Search Recipe"
                 className="w-96 h-14"
+                value={searchTerm}
+                onChange={handleChange}
               />
-              <Image className="absolute bottom-5 left-80 cursor-pointer" src={Search} alt="Search" />
+              <Image onClick={handleSearch} className="absolute bottom-5 left-80 cursor-pointer" src={Search} alt="Search" />
             </div>
           </div>
           <div className="relative right-28 z-0">
