@@ -4,7 +4,7 @@ import { Element, animateScroll as scroll, scroller } from "react-scroll";
 import Textfield from './components/base/textfield/textfield';
 import Button from './components/base/button/button';
 import Header from './components/module/header/Header';
-import Footer from './components/module/footer/Footer';
+import Footer from './components/module/footer/footer';
 import '../app/(page)/Layout.css';
 import Image from 'next/image';
 import imageDefault from '../public/assets/landing page/imagedefault.png';
@@ -15,12 +15,6 @@ import Search from '../public/assets/landing page/search.png';
 import Popular1 from '../public/assets/landing page/popular 1.svg';
 import Popular2 from '../public/assets/landing page/popular 2.svg';
 import Popular3 from '../public/assets/landing page/healthy 1.svg';
-import ChickenKare from '../public/assets/landing page/chicken kare.svg';
-import BombChicken from '../public/assets/landing page/bomb chicken.svg';
-import CoffeLava from '../public/assets/landing page/coffe lava.svg';
-import IndiaSalad from '../public/assets/landing page/india salad.svg';
-import SugarSalmon from '../public/assets/landing page/sugar salmon.svg';
-import Banana from '../public/assets/landing page/Banana.svg';
 import BG from '../public/assets/landing page/BG.svg';
 import Card from './components/base/card/card';
 import { useRouter } from 'next/navigation';
@@ -166,7 +160,6 @@ const Page = () => {
           </div>
         </div>
       </div>
-
       <Element id="information">
         <Footer />
       </Element>
