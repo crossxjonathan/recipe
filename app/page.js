@@ -25,6 +25,7 @@ import BG from '../public/assets/landing page/BG.svg';
 import Card from './components/base/card/card';
 import { useRouter } from 'next/navigation';
 import Api from './configs/Api';
+import { Pagination } from 'flowbite-react';
 
 
 const page = () => {
@@ -139,30 +140,13 @@ const page = () => {
               />
             ))}
           </div>
-          <div className="flex justify-center mt-5">
-            <Button
-              type="button"
-              name="Previous"
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="mx-2 text-center"
-            />
-            {totalPages && [...Array(totalPages)].map((_, index) => (
-              <Button
-                key={index}
-                type="button"
-                name={index + 1}
-                onClick={() => handlePageChange(index + 1)}
-                disabled={currentPage === index + 1}
-                className="mx-2 text-center"
-              />
-            ))}
-            <Button
-              type="button"
-              name="Next"
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="mx-2 text-center"
+          <div className="flex py-10 overflow-x-auto sm:justify-center">
+            <Pagination
+              layout="table"
+              currentPage={currentPage}
+              totalPages={100}
+              onPageChange={handlePageChange}
+              showIcons
             />
           </div>
         </div>

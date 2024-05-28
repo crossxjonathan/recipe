@@ -42,17 +42,17 @@ const Home = () => {
     setCurrentPage(page);
   };
 
-  const handleSearch = (id) => {
-    Api.get(`/recipes/${id}`)
-    .then((res) => {
-      router.push(`/dashboard/find-recipe/?search=${searchTerm}`)
-      console.log(res, "<<<<<<<<<<<<<<<<<res id")
-    })
+  const handleSearch = () => {
+    Api.get(`/recipes?search=`)
+      .then((res) => {
+        router.push(`/dashboard/find-recipe/?search=${searchTerm}`)
+        console.log(res, "<<<<<<<<<<<<<<<<<res search")
+      })
   };
 
 
   const handleChange = (e) => {
-    const {value} = e.target;
+    const { value } = e.target;
     setSearchTerm(value);
   };
 
@@ -65,7 +65,6 @@ const Home = () => {
       })
       .catch((err) => {
         console.error(err);
-        setLoading(false);
       });
   }, [currentPage]);
 
@@ -155,7 +154,7 @@ const Home = () => {
           </div>
           <div className="flex py-10 overflow-x-auto sm:justify-center">
             <Pagination
-              layout="navigation"
+              layout="table"
               currentPage={currentPage}
               totalPages={100}
               onPageChange={handlePageChange}
