@@ -4,7 +4,7 @@ import { Element, animateScroll as scroll, scroller } from "react-scroll";
 import Textfield from './components/base/textfield/textfield';
 import Button from './components/base/button/button';
 import Header from './components/module/header/Header';
-import Footer from './components/module/footer/footer';
+import Footer from './components/module/footer/Footer';
 import '../app/(page)/Layout.css';
 import Image from 'next/image';
 import imageDefault from '../public/assets/landing page/imagedefault.png';
@@ -27,8 +27,7 @@ import { useRouter } from 'next/navigation';
 import Api from './configs/Api';
 import { Pagination } from 'flowbite-react';
 
-
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const [menu, setMenu] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -38,9 +37,9 @@ const page = () => {
   const handleDetailRecipe = (id) => {
     Api.get(`/recipes/${id}`)
       .then((res) => {
-        router.push(`/dashboard/detail/?id=${id}`)
-        console.log(res, "<<<<<<<<<<<<<<<<<res id")
-      })
+        router.push(`/dashboard/detail/?id=${id}`);
+        console.log(res, "<<<<<<<<<<<<<<<<<res id");
+      });
   };
 
   const handlePageChange = (newPage) => {
@@ -48,18 +47,17 @@ const page = () => {
   };
 
   const handleSearch = () => {
-    Api.get(`/recipes?search=`)
+    Api.get(`/recipes?search=${searchTerm}`)
       .then((res) => {
-        router.push(`/dashboard/find-recipe/?search=${searchTerm}`)
-        console.log(res, "<<<<<<<<<<<<<<<<<res search")
-      })
+        router.push(`/dashboard/find-recipe/?search=${searchTerm}`);
+        console.log(res, "<<<<<<<<<<<<<<<<<res search");
+      });
   };
 
   const handleChange = (e) => {
     const { value } = e.target;
     setSearchTerm(value);
   };
-
 
   useEffect(() => {
     Api.get('/recipes/', { params: { page: currentPage, limit: totalPages } })
@@ -71,7 +69,7 @@ const page = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, [currentPage]);
+  }, [currentPage, totalPages]);
 
   return (
     <div id="landingpage">
@@ -169,11 +167,11 @@ const page = () => {
         </div>
       </div>
 
-      <Element id='information'>
-      <Footer />
+      <Element id="information">
+        <Footer />
       </Element>
     </div>
-  )
+  );
 }
 
-export default page
+export default Page;
