@@ -23,8 +23,8 @@ const Card = ({image, title, className, onClick}) => {
                 alt='Card'
                 ref={imageRef}
                 onClick={onClick}
-                width={80}
-                height={100}
+                width={1265}
+                height={711}
             />
             <p className='relative bottom-20 px-5 w-64 font-semibold text-2xl text-black cursor-pointer hover:text-light-yellow'>{title}</p>
         </div>

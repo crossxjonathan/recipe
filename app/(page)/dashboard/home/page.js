@@ -145,7 +145,7 @@ const Home = () => {
             {menu && menu.slice(0, 20).map((item) => (
               <Card
                 key={item.id}
-                image={item.image ? item.image : imageDefault}
+                image={imageDefault}
                 title={item.title}
                 className="grid-item cursor-pointer"
                 onClick={() => handleDetailRecipe(item.id)}
