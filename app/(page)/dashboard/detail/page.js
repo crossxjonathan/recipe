@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
-import DetailRecipe from './detailRecipe';
 import Loading from './loadingrecipe';
+import DetailRecipe from './detailRecipe';
 
 
 const DetailRecipePage = () => {
