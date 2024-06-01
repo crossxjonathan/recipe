@@ -1,14 +1,13 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { Element, animateScroll as scroll, scroller } from "react-scroll";
+import { Element } from "react-scroll";
 import Textfield from './components/base/textfield/textfield';
 import Button from './components/base/button/button';
 import Header from './components/module/header/Header';
 import Footer from './components/module/footer/footer';
 import '../app/(page)/Layout.css';
 import Image from 'next/image';
-import imageDefault from '../public/assets/landing page/imagedefault.png';
-
+import ImageDefault from '../public/assets/landing page/imagedefault.png';
 import MainImage from '../public/assets/landing page/landingpage food.svg';
 import Lettuce from '../public/assets/landing page/lettuce.svg';
 import Search from '../public/assets/landing page/search.png';
@@ -18,52 +17,43 @@ import Popular3 from '../public/assets/landing page/healthy 1.svg';
 import BG from '../public/assets/landing page/BG.svg';
 import Card from './components/base/card/card';
 import { useRouter } from 'next/navigation';
-import Api from './configs/Api';
 import { Pagination } from 'flowbite-react';
+import { GetRecipeService } from '@/services/client/recipe';
 
 const Page = () => {
-  const router = useRouter();
+  const Router = useRouter();
   const [menu, setMenu] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(8);
+  const [total, setTotal] = useState(0);
+  const [limit] = useState(8);
 
-  const handleDetailRecipe = (id) => {
-    Api.get(`/recipes/${id}`)
-      .then((res) => {
-        router.push(`/dashboard/detail/?id=${id}`);
-        console.log(res, "<<<<<<<<<<<<<<<<<res id");
-      });
-  };
+  const handleDetailRecipe = async (id) => {
+    Router.push(`/dashboard/detail-recipe/${id}`)
+  }
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
-  const handleSearch = () => {
-    Api.get(`/recipes?search=${searchTerm}`)
-      .then((res) => {
-        router.push(`/dashboard/find-recipe/?search=${searchTerm}`);
-        console.log(res, "<<<<<<<<<<<<<<<<<res search");
-      });
-  };
-
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setSearchTerm(value);
+  const fetchData = async (page, limit, search) => {
+    try {
+      const { data, total } = await GetRecipeService(page, limit, search);
+      setMenu(data);
+      setTotal(total);
+    } catch (error) {
+      console.error('Failed to fetch data:', error);
+    }
   };
 
   useEffect(() => {
-    Api.get('/recipes/', { params: { page: currentPage, limit: totalPages } })
-      .then((res) => {
-        const result = res.data.data;
-        setMenu(result);
-        setTotalPages(res.data.meta?.totalPages ?? 8);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [currentPage, totalPages]);
+    fetchData(currentPage, limit, search);
+  }, [currentPage, limit, search]);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    fetchData(1, limit, search);
+  };
 
   return (
     <div id="landingpage">
@@ -73,15 +63,20 @@ const Page = () => {
           <div className="absolute top-56 px-20">
             <h1 className="text-5xl font-semibold w-96 text-light-purple">Discover Recipe & Delicious Food</h1>
             <div className="relative right-5">
-              <Textfield
-                type="search"
-                id="search"
-                placeholder="Search Recipe"
-                className="w-96 h-14"
-                value={searchTerm}
-                onChange={handleChange}
-              />
-              <Image onClick={handleSearch} className="absolute bottom-5 left-80 cursor-pointer" src={Search} alt="Search" />
+              <div onSubmit={handleSearch}>
+                <Textfield
+                  id="Search"
+                  type="search"
+                  name="search"
+                  placeholder="Search Recipe"
+                  className="w-96 h-14"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <button type="submit" className="absolute bottom-5 left-80 cursor-pointer">
+                  <Image src={Search} alt="Search" />
+                </button>
+              </div>
             </div>
           </div>
           <div className="relative right-28 z-0">
@@ -129,6 +124,7 @@ const Page = () => {
             type="button"
             name="Learn More"
             className="w-36 h-12 bg-light-yellow text-white text-center font-normal py-2"
+            onClick={() => handleDetailRecipe(someRecipeId)} // replace `someRecipeId` with the appropriate id
           />
         </div>
       </div>
@@ -137,27 +133,27 @@ const Page = () => {
         <div className="bg-light-yellow w-5 h-28">
           <h1 className="text-4xl font-semibold py-10 px-10 w-96 text-gray-800">Popular Recipe</h1>
         </div>
-        <div className="py-40">
-          <div className="grid-container">
-            {menu && menu.slice(0, 20).map((item) => (
-              <Card
-                key={item.id}
-                image={imageDefault}
-                title={item.title}
-                className="grid-item cursor-pointer"
-                onClick={() => handleDetailRecipe(item.id)}
-              />
-            ))}
-          </div>
-          <div className="flex py-10 overflow-x-auto sm:justify-center">
-            <Pagination
-              layout="table"
-              currentPage={currentPage}
-              totalPages={100}
-              onPageChange={handlePageChange}
-              showIcons
+      </div>
+      <div className="py-40 bg-white-cream">
+        <div className="grid-container">
+          {menu && menu.slice(0, 20).map((item) => (
+            <Card
+              key={item.id}
+              image={ImageDefault}
+              title={item.title}
+              className="grid-item cursor-pointer"
+              onClick={() => handleDetailRecipe(item.id)}
             />
-          </div>
+          ))}
+        </div>
+        <div className="flex py-10 overflow-x-auto sm:justify-center">
+          <Pagination
+            layout="table"
+            currentPage={currentPage}
+            totalPages={100}
+            onPageChange={handlePageChange}
+            showIcons
+          />
         </div>
       </div>
       <Element id="information">

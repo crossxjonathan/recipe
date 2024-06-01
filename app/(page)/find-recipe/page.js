@@ -1,9 +1,9 @@
 import React from 'react';
-import MainHeader from '@/app/components/module/header/MainHeader';
+import Header from '@/app/components/module/header/Header';
 import Footer from '@/app/components/module/footer/footer';
-import { GetRecipeService } from '../../../../services/client/recipe';
-import FindRecipeClient from './find-recipe';
-import '../../Layout.css';
+import { GetRecipeService } from '../../../services/client/recipe';
+import FindRecipeClient from './findrecipe';
+import '../Layout.css';
 
 const FindRecipe = async ({ searchParams }) => {
     const page = parseInt(searchParams.page) || 1;
@@ -14,7 +14,7 @@ const FindRecipe = async ({ searchParams }) => {
     return (
         <div id="findrecipe">
             <div>
-                <MainHeader />
+                <Header />
             </div>
             <FindRecipeClient 
                 initialData={data}

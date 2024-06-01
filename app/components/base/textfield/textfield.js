@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-const TextField = ({ label, type, id, placeholder, spellCheck, className, onChange, validate, value, ...props }) => {
+const TextField = ({name, label, type, id, placeholder, spellCheck, className, onChange, validate, value, ...props }) => {
   const [values, setValues] = useState('');
   const [status, setStatus] = useState('');
 
@@ -33,6 +33,7 @@ const TextField = ({ label, type, id, placeholder, spellCheck, className, onChan
         <label htmlFor={id} className="w-1/4 py-2 text-gray-500 px-5 text-nowrap">{label}</label>
         <input
           {...props}
+          name={name}
           type={type}
           id={id}
           spellCheck={spellCheck}

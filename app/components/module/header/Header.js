@@ -6,17 +6,29 @@ import User from '../../../../public/assets/auth/profilepng.png';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ThemeSwitch from '../../base/darkmode/darkmodetoggle';
-
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
+  const Router = useRouter();
+
   const handleLogin = () => {
     toast.loading("Please Wait....")
-    window.location.href = '/auth/login'
+    Router.push('/auth/login')
   }
 
   const handleHeader = () => {
     toast.info("Please Login First!!!")
-    window.location.href = '/auth/login'
+    Router.push('/auth/login')
+  }
+
+  const handleHome = () => {
+    toast.info("Please wait....")
+    Router.push('/')
+  }
+
+  const handleSearch = () => {
+    toast.loading("Please wait....")
+    Router.push('/find-recipe')
   }
 
   return (
@@ -24,7 +36,7 @@ const Header = () => {
       <div className="flex flex-row gap-16">
         <ul>
           <li>
-            <button onClick={handleHeader} className='text-light-purple'>Home</button>
+            <button onClick={handleHome} className='text-light-purple'>Home</button>
           </li>
         </ul>
         <ul>
@@ -35,6 +47,11 @@ const Header = () => {
         <ul>
           <li>
             <button onClick={handleHeader} className="text-light-purple">Profile</button>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <button onClick={handleSearch} className="text-light-purple">Recipe</button>
           </li>
         </ul>
       </div>
