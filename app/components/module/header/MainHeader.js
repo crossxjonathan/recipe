@@ -6,22 +6,30 @@ import User from '../../../../public/assets/auth/profilepng.png';
 import 'react-toastify/dist/ReactToastify.css';
 import ThemeSwitch from '../../base/darkmode/darkmodetoggle';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 
 const MainHeader = () => {
+  const Router = useRouter();
+
   const handleHome = () => {
     toast.loading("Please wait....")
-    window.location.href = '/dashboard/home'
+    Router.push ('/dashboard/home')
   }
 
   const handleAddRecipe = () => {
     toast.loading("Please wait....")
-    window.location.href = '/dashboard/add-recipe'
+    Router.push('/dashboard/add-recipe')
   }
 
   const handleProfile = () => {
     toast.loading("Please wait....")
-    window.location.href = '/dashboard/profile/my-recipe'
+    Router.push('/dashboard/profile/my-recipe')
+  }
+
+  const handleSearch = () => {
+    toast.loading("Please wait....")
+    Router.push('/dashboard/find-recipe')
   }
 
   return (
@@ -40,6 +48,11 @@ const MainHeader = () => {
         <ul>
           <li>
             <button onClick={handleProfile} className="text-light-purple">Profile</button>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <button onClick={handleSearch} className="text-light-purple">Recipe</button>
           </li>
         </ul>
       </div>

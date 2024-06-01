@@ -4,48 +4,43 @@ import Footer from '@/app/components/module/footer/footer';
 import MainHeader from '@/app/components/module/header/MainHeader';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Sandwich from '../../../../public/assets/detail recipe/detail recipe.svg';
+import Sandwich from '../../../../../public/assets/detail recipe/detail recipe.svg';
 import VideoBtn from '@/app/components/base/button/videoBtn';
-import TextField from '../../../components/base/textfield/textfield';
+import TextField from '../../../../components/base/textfield/textfield';
 import Button from '@/app/components/base/button/button';
-import Comment from '../../../../public/assets/detail recipe/comment.svg';
-import Profile from '../../../../public/assets/auth/profilepng.png';
-import Api from '@/app/configs/Api';
-import { useSearchParams } from 'next/navigation';
-import ImageDefault from '../../../../public/assets/landing page/imagedefault.png';
+import Comment from '../../../../../public/assets/detail recipe/comment.svg';
+import Profile from '../../../../../public/assets/auth/profilepng.png';
+import { useParams } from 'next/navigation';
+import ImageDefault from '../../../../../public/assets/landing page/imagedefault.png';
+import { GetDetailRecipe } from '@/services/client/recipe';
 
 const DetailRecipe = () => {
   const [detail, setDetail] = useState(null);
   const [error, setError] = useState('');
-  const searchParams = useSearchParams();
-
-  const id = searchParams.get("id");
+  const [loading, setLoading] = useState(true);
+  const {id} = useParams();
 
   useEffect(() => {
-    const getData = async () => {
+    const fetchRecipe = async () => {
       try {
-        const { data: res } = await Api.get(`/recipes/${id}`);
-        console.log(res.data, "<<<<<<<<<<<response");
-        setDetail(res.data);
-      } catch (error) {
-        console.error('Error fetching recipe details:', error);
-        setError('Failed to fetch recipe details.');
+        const res = await GetDetailRecipe(id);
+        setDetail(res && res.data)
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
       }
     };
-    getData();
+    
+      fetchRecipe()
   }, [id]);
+  console.log(detail, '<<<<<detail')
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!detail) return <div>Recipe Not Found!</div>;
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  const { title, image, description } = detail;
 
-  if (!detail) {
-    return <div>Loading...</div>;
-  }
-
-  const { title, description, image } = detail;
-
-  
   return (
     <div id='detail-recipe'>
       <div className='header-wrapper'>
