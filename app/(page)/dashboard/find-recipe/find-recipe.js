@@ -10,6 +10,7 @@ import { GetRecipeService } from '../../../../services/client/recipe';
 import '../../Layout.css';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
+import DetailRecipe from '../detail-recipe/[id]/page';
 
 const FindRecipeDashboard = ({ initialData, initialTotal, initialSearch, initialPage, initialLimit }) => {
     const [data, setData] = useState(initialData);
@@ -18,7 +19,11 @@ const FindRecipeDashboard = ({ initialData, initialTotal, initialSearch, initial
     const [currentPage, setCurrentPage] = useState(initialPage);
     const [limit, setLimit] = useState(initialLimit);
     const [detail, setDetail] = useState(null);
-    const Router = useRouter();
+    const [sortType, setSortType] = useState("ascending");
+    const [sortByField, setSortByField] = useState("title");
+    const [filteredData, setFilteredData] = useState(initialData);
+
+    const router = useRouter();
     const searchParams = useSearchParams();
     const id = searchParams.get('id');
 
@@ -32,81 +37,103 @@ const FindRecipeDashboard = ({ initialData, initialTotal, initialSearch, initial
         fetchData(currentPage, limit, search);
     }, [currentPage, limit, search]);
 
-    // const handleSearch = async (e) => {
-    //     e.preventDefault();
-    //     fetchData(1, limit, search);
-    // };
+    useEffect(() => {
+        const results = data.filter(item =>
+            item[sortByField].toLowerCase().includes(search.toLowerCase())
+        );
+        setFilteredData(results);
+    }, [search, sortByField, data]);
 
-    const handleDetailRecipe = async (id) => {
-        Router.push(`/dashboard/detail-recipe/${id}`)
-    }
+    const handleDetailRecipe = (id) => {
+        router.push(`/dashboard/detail-recipe/${id}`);
+    };
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
+    const handleSearchChange = (e) => {
+        setSearch(e.target.value);
+    };
+
+    const handleSortChange = (e) => {
+        const { value } = e.target;
+        if (value === "title" || value === "ascending" || value === "descending") {
+            if (value === "title") {
+                setSortByField(value);
+            } else {
+                setSortType(value);
+            }
+        }
+    };
+
+    const sortedData = [...filteredData].sort((a, b) => {
+        if (sortType === "ascending") {
+            return a[sortByField] < b[sortByField] ? -1 : 1;
+        } else {
+            return a[sortByField] > b[sortByField] ? -1 : 1;
+        }
+    });
 
     return (
-        <div id="findrecipe">
-            <div>
-            </div>
+        <div>
             <div className="flex flex-col md:flex-row gap-3 justify-center">
                 <div className='flex'>
-                <TextField
+                    <TextField
                         id="Search"
                         type="search"
                         name="search"
                         placeholder="Find Out Your Recipe"
                         value={search}
-                        onChange={(e) => setSearch(e.target.value)}
+                        onChange={handleSearchChange}
                         className="w-full md:w-80 px-3 h-10 rounded-l border-2"
                     />
-                    {/* <Button
-                        type="submit"
-                        name="Search"
-                        className="text-center bg-light-yellow text-white hover:bg-light-purple hover:text-white px-2 md:px-3 py-0 md:py-1 relative top-4"
-                        onClick={handleSearch}
-                    /> */}
                 </div>
-                <select id="pricingType" name="pricingType"
-                    className="h-10 border-2 border-light-yellow focus:outline-none focus:border-light-yellow text-light-yellow rounded px-2 md:px-3 py-0 md:py-1 tracking-wider relative top-4">
-                    <option value="All" selected="">All</option>
-                    <option value="SortBy">SortBy</option>
+                <select
+                    id="sortOptions"
+                    className="h-10 border-2 border-light-yellow focus:outline-none focus:border-light-yellow text-light-yellow rounded px-2 md:px-3 py-0 md:py-1 tracking-wider relative top-4 hover:text-white hover:bg-light-yellow"
+                    onChange={handleSortChange}
+                >
+                    <option value="title">Title</option>
+                    <option value="ascending">Asc</option>
+                    <option value="descending">Desc</option>
                 </select>
             </div>
             <div className='grid justify-center py-10'>
                 <div className='flex justify-center py-10'>
                     <h1 className='text-4xl font-semibold'>Recipes List</h1>
                 </div>
-                <div>
-                    <div className="grid-container">
-                        {data && data.length > 0 ? data.slice(0, 20).map((item) => (
-                            <Card
-                                key={item.id}
-                                image={ImageDefault}
-                                title={item.title}
-                                className="grid-item cursor-pointer"
-                                onClick={() => handleDetailRecipe(item.id)}
+                {detail ? (
+                    <DetailRecipe detail={detail} />
+                ) : (
+                    <div>
+                        <div className="grid-container">
+                            {sortedData.length > 0 ? sortedData.map((item) => (
+                                <Card
+                                    key={item.id}
+                                    image={ImageDefault}
+                                    title={item.title}
+                                    className="grid-item cursor-pointer"
+                                    onClick={() => handleDetailRecipe(item.id)}
+                                />
+                            )) : (
+                                <p>No recipes found</p>
+                            )}
+                        </div>
+                        <div className="flex py-10 overflow-x-auto sm:justify-center">
+                            <Pagination
+                                layout="table"
+                                currentPage={currentPage}
+                                totalPages={100}
+                                onPageChange={handlePageChange}
+                                showIcons
                             />
-                        )) : (
-                            <p>No recipes found</p>
-                        )}
+                        </div>
                     </div>
-                    <div className="flex py-10 overflow-x-auto sm:justify-center">
-                        <Pagination
-                            layout="table"
-                            currentPage={currentPage}
-                            totalPages={100}
-                            onPageChange={handlePageChange}
-                            showIcons
-                        />
-                    </div>
-                </div>
-            </div>
-            <div>
+                )}
             </div>
         </div>
     );
-}
+};
 
 export default FindRecipeDashboard;

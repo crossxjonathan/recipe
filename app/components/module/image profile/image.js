@@ -12,7 +12,7 @@ const ImageProfile = ({ img }) => {
   }
 
   const handleLogout = () => {
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     toast.success("Good Bye....")
     window.location.href = '/'
   }

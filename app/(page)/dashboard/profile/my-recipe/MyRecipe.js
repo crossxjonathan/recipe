@@ -10,19 +10,58 @@ import ImageDefault from '../../../../../public/assets/landing page/imagedefault
 import Api from '@/app/configs/Api';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Pagination } from 'flowbite-react';
-import { FaEye, FaTrash } from 'react-icons/fa';
+import { FaEye, FaPencilAlt, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { GetProfile } from '@/services/client/profile';
+import { DeleteMyRecipeService, GetProfile, UpdateMyRecipeService, GetMyRecipeService } from '@/services/client/profile';
 
-const MyRecipe = async () => {
-    const result = await GetProfile();
-    // const profile = result.data
+const MyRecipe = () => {
+    const Router = useRouter();
+    const [profile, setProfile] = useState({});
+    const [myRecipe, setMyRecipe] = useState([]);
 
-    // const handlePageChange = (page) => {
-    //     setCurrentPage(page);
-    // };
+    const handleDetailRecipe = async (id) => {
+        Router.push(`/dashboard/detail-recipe/${id}`);
+    }
 
+    const handleGetProfile = async () => {
+        try {
+            const user = await GetProfile()
+            setProfile(user.data)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    const handleGetMyRecipe = async () => {
+        try {
+            const { data } = await GetMyRecipeService();
+            setMyRecipe(data)
+        } catch (error) {
+
+        }
+    }
+
+    const handleUpdateRecipe = (id) => {
+        Router.push(`/dashboard/update-recipe/${id}`);
+    }
+
+    const handleDeleteMyRecipe = async (id) => {
+        try {
+            const result = await DeleteMyRecipeService(id);
+            console.log('Recipe deleted successfully:', result);
+            handleGetMyRecipe();
+            toast.success("Recipe deleted successfully!");
+        } catch (error) {
+            console.error('Failed to delete the recipe:', error);
+            toast.error("Failed to delete the recipe!");
+        }
+    };
+
+    useEffect(() => {
+        handleGetMyRecipe()
+        handleGetProfile()
+    }, [])
 
     return (
         <div>
@@ -32,35 +71,29 @@ const MyRecipe = async () => {
                 <div className='relative bottom-2 px-20 cursor-pointer'>
                     <Image src={EditImg} alt="Edit Icon" />
                 </div>
-                {/* <p className='font-semibold'>{name}</p> */}
+                <div>
+                    <p className='font-semibold'>{profile.name}</p>
+                    <p className='font-semibold'>{profile.email}</p>
+                </div>
             </div>
             <div className='flex flex-row gap-14 px-20 py-5 font-semibold'>
                 <p>My Recipe</p>
-                <p onClick={() => router.push('/dashboard/profile/saved-recipe')} className='cursor-pointer text-gray-400'>Saved Recipe</p>
-                <p onClick={() => router.push('/dashboard/profile/liked-recipe')} className='cursor-pointer text-gray-400'>Liked Recipe</p>
+                <p onClick={() => Router.push('/dashboard/profile/saved-recipe')} className='cursor-pointer text-gray-400'>Saved Recipe</p>
+                <p onClick={() => Router.push('/dashboard/profile/liked-recipe')} className='cursor-pointer text-gray-400'>Liked Recipe</p>
             </div>
             <hr />
             <div className='flex flex-wrap gap-5 px-20 py-10'>
-                <p>{JSON.stringify(result)}</p>
-                {/* {recipes.map((recipe) => (
-                    <div key={recipe.id} className='relative'>
+                {myRecipe.map((item) => (
+                    <div key={item.id} className='relative'>
                         <div className='absolute flex gap-3 top-2 right-2'>
-                            <FaEye className="cursor-pointer hover:bg-white" onClick={() => handleDetailRecipe(recipe.id)} />
-                            <FaTrash className="cursor-pointer hover:bg-white" onClick={() => handleDelete(recipe.id)} />
+                            <FaEye className="cursor-pointer w-5 h-5" onClick={() => handleDetailRecipe(item.id)} />
+                            <FaPencilAlt className="cursor-pointer w-5 h-5" onClick={() => handleUpdateRecipe(item.id)} />
+                            <FaTrash className="cursor-pointer w-5 h-5" onClick={() => handleDeleteMyRecipe(item.id)} />
                         </div>
-                        <Image className="w-64 h-72 rounded-xl bg-light-yellow" src={ImageDefault} width={1265} height={711} alt={recipe.title} />
-                        <p className="absolute bottom-5 left-3 text-2xl text-white font-semibold cursor-pointer hover:text-light-purple">{recipe.title}</p>
+                        <Image className="w-64 h-72 rounded-xl bg-light-yellow" src={ImageDefault} width={1265} height={711} alt={item.title} />
+                        <p className="absolute bottom-5 left-3 text-2xl text-white font-semibold cursor-pointer hover:text-light-purple">{item.title}</p>
                     </div>
-                ))} */}
-            </div>
-            <div className="flex py-10 overflow-x-auto justify-center">
-                {/* <Pagination
-                    layout="table"
-                    currentPage={currentPage}
-                    totalPages={100}
-                    onPageChange={handlePageChange}
-                    showIcons
-                /> */}
+                ))}
             </div>
             <ProfileFooter />
         </div>

@@ -4,12 +4,20 @@ const nextConfig = {
     return [
       {
         source: '/v1/:slug*',
-        destination: `https://pijar-mama-recipe.vercel.app/v1/:slug*`,
+        destination: `${process.env.NEXT_PUBLIC_RECIPE}/v1/:slug*`,
       },
     ];
   },
   images: {
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'asset-2.tstatic.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
       {
         protocol: 'https',
         hostname: 'statics.indozone.news',
@@ -20,6 +28,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'google.com',
+      },
+      {
+        protocol: 'http',
         hostname: 'google.com',
       },
       {

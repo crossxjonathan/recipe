@@ -59,7 +59,7 @@ const Header = () => {
         <ImageProfile
           img={User}
         />
-        <button onClick={handleLogin} className="px-16 py-3 absolute text-white">Login</button>
+        <button onClick={handleLogin} className="px-16 py-3 absolute text-light-purple">Login</button>
         <ToastContainer
           position='bottom-right'
         />

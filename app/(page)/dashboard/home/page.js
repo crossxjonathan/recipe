@@ -125,7 +125,7 @@ const MainPage = () => {
             type="button"
             name="Learn More"
             className="w-36 h-12 bg-light-yellow text-white text-center font-normal py-2"
-            onClick={() => handleDetailRecipe(someRecipeId)} // replace `someRecipeId` with the appropriate id
+            onClick={() => handleDetailRecipe(someRecipeId)}
           />
         </div>
       </div>

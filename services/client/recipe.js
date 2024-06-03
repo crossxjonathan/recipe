@@ -22,7 +22,9 @@ export const AddRecipeService = async (data) => {
 
 export const GetRecipeService = async (page = 1, limit = 8, search = "") => {
     try {
-        const response = await fetch(`https://pijar-mama-recipe.vercel.app/v1/recipes?page=${page}&limit=${limit}&search=${search}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/recipes?page=${page}&limit=${limit}&search=${search}`, {
+            cache: 'no-cache'
+        })
         if (!response.ok) {
             throw new Error('Something Wrong!!')
         }
@@ -35,7 +37,7 @@ export const GetRecipeService = async (page = 1, limit = 8, search = "") => {
 }
 
 export const GetDetailRecipe = async (id) => {
-    const res = await fetch(`https://pijar-mama-recipe.vercel.app/v1/recipes/${id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/recipes/${id}`);
     console.log(res, "<<<<<<<<<<<<<<<<<<<<<<<<<id")
     if (!res.ok) {
         throw new Error("Failed to fetch data");
