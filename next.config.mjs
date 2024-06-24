@@ -12,6 +12,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'i0.wp.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'asset-2.tstatic.net',
       },
       {

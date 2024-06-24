@@ -7,7 +7,6 @@ import MainHeader from '@/app/components/module/header/MainHeader';
 import Footer from '@/app/components/module/footer/footer';
 import '../../Layout.css';
 import Image from 'next/image';
-import imageDefault from '../../../../public/assets/landing page/imagedefault.png';
 import MainImage from '@/public/assets/landing page/landingpage food.svg';
 import Lettuce from '@/public/assets/landing page/lettuce.svg';
 import Search from '@/public/assets/landing page/search.png';
@@ -55,6 +54,8 @@ const MainPage = () => {
     e.preventDefault();
     fetchData(1, limit, search);
   };
+
+  const imageDefault = '/assets/landing page/imagedefault.png';
 
   return (
     <div id="landingpage">
@@ -140,7 +141,7 @@ const MainPage = () => {
           {menu && menu.slice(0, 20).map((item) => (
             <Card
               key={item.id}
-              image={imageDefault}
+              image={item.image || imageDefault}
               title={item.title}
               className="grid-item cursor-pointer"
               onClick={() => handleDetailRecipe(item.id)}
