@@ -1,7 +1,5 @@
 "use client";
 
-import TextField from '@/app/components/base/textfield/textfield';
-import TextArea from '@/app/components/base/textfield/TextArea';
 import Button from '@/app/components/base/button/button';
 import { toast } from 'react-toastify';
 import { UpdateMyRecipeService } from '@/services/client/profile';
@@ -10,7 +8,6 @@ import Footer from '@/app/components/module/footer/footer';
 import MainHeader from '@/app/components/module/header/MainHeader';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import input from './../../../../components/base/textfield/input';
 import AddVideo from '@/app/components/module/gallery/addvideo';
 import AddPhoto from '@/app/components/module/gallery/addphoto';
 

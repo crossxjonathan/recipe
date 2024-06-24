@@ -7,7 +7,6 @@ import Header from './components/module/header/Header';
 import Footer from './components/module/footer/footer';
 import '../app/(page)/Layout.css';
 import Image from 'next/image';
-import ImageDefault from '../public/assets/landing page/imagedefault.png';
 import MainImage from '../public/assets/landing page/landingpage food.svg';
 import Lettuce from '../public/assets/landing page/lettuce.svg';
 import Search from '../public/assets/landing page/search.png';
@@ -54,6 +53,9 @@ const Page = () => {
     e.preventDefault();
     fetchData(1, limit, search);
   };
+
+  const ImageDefault = '/imagedefault.png';
+
 
   return (
     <div id="landingpage">
@@ -124,7 +126,7 @@ const Page = () => {
             type="button"
             name="Learn More"
             className="w-36 h-12 bg-light-yellow text-white text-center font-normal py-2"
-            onClick={() => handleDetailRecipe(someRecipeId)} // replace `someRecipeId` with the appropriate id
+            onClick={() => handleDetailRecipe(someRecipeId)}
           />
         </div>
       </div>
@@ -139,7 +141,7 @@ const Page = () => {
           {menu && menu.slice(0, 20).map((item) => (
             <Card
               key={item.id}
-              image={item.image || imageDefault}
+              image={item.image || ImageDefault}
               title={item.title}
               className="grid-item cursor-pointer"
               onClick={() => handleDetailRecipe(item.id)}
