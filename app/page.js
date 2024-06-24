@@ -135,11 +135,11 @@ const Page = () => {
         </div>
       </div>
       <div className="py-40 bg-white-cream">
-        <div className="grid-container">
+      <div className="grid-container">
           {menu && menu.slice(0, 20).map((item) => (
             <Card
               key={item.id}
-              image={ImageDefault}
+              image={item.image || imageDefault}
               title={item.title}
               className="grid-item cursor-pointer"
               onClick={() => handleDetailRecipe(item.id)}

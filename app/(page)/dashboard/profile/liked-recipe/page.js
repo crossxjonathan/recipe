@@ -2,24 +2,30 @@
 
 import ProfileFooter from '@/app/components/module/footer/profilefooter';
 import MainHeader from '@/app/components/module/header/MainHeader';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import ImageProfile from '../../../../../public/assets/profile/profileimage.svg';
 import EditImg from '../../../../../public/assets/profile/edit-3.svg';
 import BombChicken from '../../../../../public/assets/profile/bomb chicken1.svg';
 import BananasPancake from '../../../../../public/assets/profile/bananas 1.svg';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { GetProfile } from '@/services/client/profile';
 
 const LikedRecipe = () => {
   const Router = useRouter();
- 
-  const HandleMyRecipe = () => {
-    Router.push('/dashboard/profile/my-recipe')
+  const [profile, setProfile] = useState({})
+  const handleGetProfile = async () => {
+    try {
+      const user = await GetProfile()
+      setProfile(user.data)
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  const HandleSavedRecipe = () => {
-    Router.push('/dashboard/profile/saved-recipe')
-  }
+  useEffect(() => {
+    handleGetProfile()
+  }, [])
 
   return (
     <div>
@@ -32,18 +38,19 @@ const LikedRecipe = () => {
           <Image src={EditImg} alt="EditImg" />
         </div>
         <div>
-          <p className='font-semibold'>Garneta Sharina</p>
+          <p className='font-semibold'>{profile.name}</p>
+          <p className='font-semibold'>{profile.email}</p>
         </div>
       </div>
       <div className='flex flex-row flex-1 gap-14 px-20 py-5 font-semibold'>
         <ul>
           <li>
-            <p onClick={HandleMyRecipe} className='cursor-pointer text-gray-400'>My Recipe</p>
+            <p onClick={() => Router.push('/dashboard/profile/my-recipe')} className='cursor-pointer text-gray-400'>My Recipe</p>
           </li>
         </ul>
         <ul>
           <li>
-            <p onClick={HandleSavedRecipe} className='cursor-pointer text-gray-400'>Saved Recipe</p>
+            <p onClick={() => Router.push('/dashboard/profile/saved-recipe')} className='cursor-pointer text-gray-400'>Saved Recipe</p>
           </li>
         </ul>
         <ul>

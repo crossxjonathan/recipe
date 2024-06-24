@@ -27,7 +27,7 @@ const Card = ({image, title, className, onClick}) => {
                 width={1265}
                 height={711}
             />
-            <p className='relative bottom-20 px-5 w-64 font-semibold text-2xl text-black cursor-pointer hover:text-light-yellow'>{title}</p>
+            <p className='relative bottom-20 px-5 w-72 font-semibold text-2xl text-black border-text-white cursor-pointer hover:text-light-yellow'>{title}</p>
         </div>
     )
 }
