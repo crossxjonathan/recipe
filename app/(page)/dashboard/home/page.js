@@ -55,7 +55,7 @@ const MainPage = () => {
     fetchData(1, limit, search);
   };
 
-  const imageDefault = '/assets/landing page/imagedefault.png';
+  const imageDefault = '/imagedefault.png';
 
   return (
     <div id="landingpage">
