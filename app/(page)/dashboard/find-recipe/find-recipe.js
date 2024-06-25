@@ -5,7 +5,7 @@ import TextField from '@/app/components/base/textfield/textfield';
 import Button from '@/app/components/base/button/button';
 import { Pagination } from 'flowbite-react';
 import Card from '@/app/components/base/card/card';
-import ImageDefault from '../../../../public/assets/landing page/imagedefault.png';
+// import ImageDefault from '../../../../public/assets/landing page/imagedefault.png';
 import { GetRecipeService } from '../../../../services/client/recipe';
 import '../../Layout.css';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -75,6 +75,8 @@ const FindRecipeDashboard = ({ initialData, initialTotal, initialSearch, initial
         }
     });
 
+    const ImageDefault = '/imagedefault.png';
+
     return (
         <div>
             <div className="flex flex-col md:flex-row gap-3 justify-center">
@@ -111,8 +113,10 @@ const FindRecipeDashboard = ({ initialData, initialTotal, initialSearch, initial
                             {sortedData.length > 0 ? sortedData.map((item) => (
                                 <Card
                                     key={item.id}
-                                    image={ImageDefault}
+                                    image={item.image || ImageDefault}
                                     title={item.title}
+                                    width={256}
+                            height={288} 
                                     className="grid-item cursor-pointer"
                                     onClick={() => handleDetailRecipe(item.id)}
                                 />

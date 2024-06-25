@@ -6,14 +6,12 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import ImageProfile from '../../../../../public/assets/profile/profileimage.svg';
 import EditImg from '../../../../../public/assets/profile/edit-3.svg';
-// import ImageDefault from '../../../../../public/assets/landing page/imagedefault.png';
-import Api from '@/app/configs/Api';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Pagination } from 'flowbite-react';
+// import Api from '@/app/configs/Api';
+import { useRouter } from 'next/navigation';
 import { FaEye, FaPencilAlt, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { DeleteMyRecipeService, GetProfile, UpdateMyRecipeService, GetMyRecipeService } from '@/services/client/profile';
+import { DeleteMyRecipeService, GetProfile, GetMyRecipeService } from '@/services/client/profile';
 
 const MyRecipe = () => {
     const Router = useRouter();
@@ -87,12 +85,17 @@ const MyRecipe = () => {
             <div className='flex flex-wrap gap-5 px-20 py-10'>
                 {myRecipe.map((item) => (
                     <div key={item.id} className='relative'>
-                        <div className='absolute flex gap-3 top-2 right-2'>
+                        <div className='absolute flex gap-5 top-2 right-2'>
                             <FaEye className="cursor-pointer w-5 h-5" onClick={() => handleDetailRecipe(item.id)} />
                             <FaPencilAlt className="cursor-pointer w-5 h-5" onClick={() => handleUpdateRecipe(item.id)} />
                             <FaTrash className="cursor-pointer w-5 h-5" onClick={() => handleDeleteMyRecipe(item.id)} />
                         </div>
-                        <Image className="w-64 h-72 rounded-xl bg-light-yellow" src={item.image || ImageDefault} width={1265} height={711} alt={item.title} />
+                        <Image 
+                            className="w-64 h-72 rounded-xl bg-light-yellow object-cover" 
+                            src={item.image || ImageDefault} 
+                            width={256}
+                            height={288} 
+                            alt={item.title} />
                         <p className="absolute bottom-5 left-3 text-2xl text-white font-semibold cursor-pointer hover:text-light-purple">{item.title}</p>
                     </div>
                 ))}
