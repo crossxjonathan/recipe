@@ -12,6 +12,14 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'www.unileverfoodsolutions.co.id',
+      },
+      {
+        protocol: 'https',
+        hostname: 'akcdn.detik.net.id',
+      },
+      {
+        protocol: 'https',
         hostname: 'i0.wp.com',
       },
       {

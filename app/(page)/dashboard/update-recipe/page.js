@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import Loading from './LoadingUpdate'
-import UpdateRecipe from './UpdateRecipe';
+import UpdateRecipe from './[id]/page';
 
 const UpdateRecipePage = () => {
   return (
