@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import AddVideo from '@/app/components/module/gallery/addvideo';
 import AddPhoto from '@/app/components/module/gallery/addphoto';
 
-const UpdateRecipe = ({ params }) => {
+const UpdateRecipe = ({ params = {} }) => {
     const Router = useRouter();
     const { id } = params;
     const [form, setForm] = useState({
@@ -28,7 +28,6 @@ const UpdateRecipe = ({ params }) => {
             image: imageUrl
         }));
     };
-
 
     useEffect(() => {
         const fetchRecipe = async () => {

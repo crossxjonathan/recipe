@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import ImageProfile from '../../../../../public/assets/profile/profileimage.svg';
 import EditImg from '../../../../../public/assets/profile/edit-3.svg';
-import ImageDefault from '../../../../../public/assets/landing page/imagedefault.png';
+// import ImageDefault from '../../../../../public/assets/landing page/imagedefault.png';
 import Api from '@/app/configs/Api';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Pagination } from 'flowbite-react';
@@ -63,6 +63,8 @@ const MyRecipe = () => {
         handleGetProfile()
     }, [])
 
+    const ImageDefault = '/imagedefault.png';
+
     return (
         <div>
             <MainHeader />
@@ -90,7 +92,7 @@ const MyRecipe = () => {
                             <FaPencilAlt className="cursor-pointer w-5 h-5" onClick={() => handleUpdateRecipe(item.id)} />
                             <FaTrash className="cursor-pointer w-5 h-5" onClick={() => handleDeleteMyRecipe(item.id)} />
                         </div>
-                        <Image className="w-64 h-72 rounded-xl bg-light-yellow" src={ImageDefault} width={1265} height={711} alt={item.title} />
+                        <Image className="w-64 h-72 rounded-xl bg-light-yellow" src={item.image || ImageDefault} width={1265} height={711} alt={item.title} />
                         <p className="absolute bottom-5 left-3 text-2xl text-white font-semibold cursor-pointer hover:text-light-purple">{item.title}</p>
                     </div>
                 ))}
