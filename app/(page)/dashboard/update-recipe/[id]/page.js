@@ -86,7 +86,7 @@ const UpdateRecipe = ({ params = {} }) => {
             <div className="grid justify-center py-10">
                 <form onSubmit={handleSubmit}>
                     <div className="py-5">
-                        <AddPhoto onImageUpload={handleImageUpload}/>
+                        {/* <AddPhoto onImageUpload={handleImageUpload}/> */}
                     </div>
                     <input
                         id="image"
