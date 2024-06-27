@@ -12,63 +12,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'www.unileverfoodsolutions.co.id',
-      },
-      {
-        protocol: 'https',
-        hostname: 'akcdn.detik.net.id',
-      },
-      {
-        protocol: 'https',
-        hostname: 'i0.wp.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'asset-2.tstatic.net',
-      },
-      {
-        protocol: 'https',
-        hostname: 'i.ytimg.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'statics.indozone.news',
-      },
-      {
-        protocol: 'https',
-        hostname: 'thumb.viva.id',
-      },
-      {
-        protocol: 'https',
-        hostname: 'google.com',
+        hostname: '**',
       },
       {
         protocol: 'http',
-        hostname: 'google.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'img-global.cpcdn.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn1-production-images-kly.akamaized.net',
-      },
-      {
-        protocol: 'https',
-        hostname: 'asset.kompas.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'static.promediateknologi.id',
-      },
-      {
-        protocol: 'https',
-        hostname: 'img.kurio.network',
-      },
-      {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
+        hostname: '**',
       },
     ],
   },

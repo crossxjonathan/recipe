@@ -13,6 +13,7 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const Router = useRouter();
+    const [error, setError] = useState('');
 
     const handleRegister = () => {
         toast.loading("Please Wait....")
@@ -27,6 +28,7 @@ const LoginPage = () => {
         e.preventDefault();
 
         if (email === '' || password === '') {
+            setError('All fields are required')
             toast.error('You must fill in all forms!!!');
             return;
         }

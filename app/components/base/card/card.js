@@ -1,6 +1,7 @@
 "use client";
 import Image from 'next/image';
 import React, { useEffect, useRef } from 'react';
+import './card.css';
 
 const Card = ({image, title, className, onClick}) => {
     
@@ -27,8 +28,8 @@ const Card = ({image, title, className, onClick}) => {
                 width={1265}
                 height={711}
             />
-            <p className='relative bottom-20 px-5 w-72 font-semibold text-2xl text-black border-text-white cursor-pointer hover:text-light-yellow'>{title}</p>
-        </div>
+<p className='relative bottom-40 px-5 w-64 font-semibold text-lg text-black cursor-pointer hover:text-light-yellow text-with-border'>{title}</p>
+</div>
     )
 }
 
