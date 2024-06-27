@@ -1,0 +1,11 @@
+@media (max-width: 700px) {
+
+    #header {
+        width: 100%;
+    }
+
+    #header .LoginGroup {
+        padding-top: 30px;
+        padding-right: 150px
+    }
+}

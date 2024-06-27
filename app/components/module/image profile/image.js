@@ -3,19 +3,39 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
 
 const ImageProfile = ({ img }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigation = useRouter();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-  }
+  };
 
-  const handleLogout = () => {
-    document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    toast.success("Good Bye....")
-    window.location.href = '/'
-  }
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/v1/auth/logout', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to logout');
+      }
+
+      toast.success("Good Bye....");
+
+      navigation.push('/');
+    } catch (error) {
+      console.error('Logout error:', error);
+      toast.error("Failed to logout. Please try again.");
+    }
+  };
 
   return (
     <div className='relative inline-block text-left'>

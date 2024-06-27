@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ThemeSwitch from '../../base/darkmode/darkmodetoggle';
 import { useRouter } from 'next/navigation';
+import './header.css';
 
 const Header = () => {
   const Router = useRouter();
@@ -32,8 +33,8 @@ const Header = () => {
   }
 
   return (
-    <header className="flex flex-row flex-1 px-16 py-10 justify-between font-semibold text-light-purple">
-      <div className="flex flex-row gap-16">
+    <header id="header" className="flex flex-row flex-1 px-16 py-10 justify-between font-semibold text-light-purple">
+      <div className="flex flex-row gap-16 header-container">
         <ul>
           <li>
             <button onClick={handleHome} className='text-light-purple'>Home</button>
@@ -55,7 +56,7 @@ const Header = () => {
           </li>
         </ul>
       </div>
-      <div className="flex absolute flex-row right-16 gap-2">
+      <div className="flex absolute flex-row right-16 gap-2 LoginGroup">
         <ImageProfile
           img={User}
         />

@@ -11,10 +11,119 @@ export const GetProfile = async () => {
     }
 }
 
+export const GetLikeRecipe = async () => {
+    try {
+        const res = await fetch(`/v1/recipes/like`, {
+            credentials: 'include'
+        });
+        if (!res.ok) {
+            throw new Error('Failed to fetch liked recipes');
+        }
+        const result = await res.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+        return Promise.reject('Something went wrong');
+    }
+};
+
+export const AddLikeRecipe = async (recipe_id) => {
+    try {
+        const response = await fetch(`/v1/recipes/like`, {
+            method: "POST",
+            body: JSON.stringify({ recipe_id }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            return data;
+        } else {
+            throw new Error(data.message || 'Failed to like the recipe');
+        }
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+
+export const cancelLikeRecipe = async (recipe_id) => {
+    try {
+        const response = await fetch(`/v1/recipes/like/${recipe_id}`, {
+            method: "DELETE",
+        });
+        if (!response.ok) {
+            throw new Error('Something Wrong!!');
+        }
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+        return Promise.reject(error.message || 'Something Wrong!!');
+    }
+}
+
+export const GetSaveRecipe = async () => {
+    try {
+        const res = await fetch(`/v1/recipes/save`, {
+            credentials: 'include'
+        });
+        if (!res.ok) {
+            throw new Error('Failed to fetch saved recipes');
+        }
+        const result = await res.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+        return Promise.reject('Something went wrong');
+    }
+};
+
+
+export const AddSaveRecipe = async (recipe_id) => {
+    try {
+        const response = await fetch(`/v1/recipes/save`, {
+            method: "POST",
+            body: JSON.stringify({ recipe_id }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            return data;
+        } else {
+            throw new Error(data.message || 'Failed to like the recipe');
+        }
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+
+export const cancelSaveRecipe = async (recipe_id) => {
+    try {
+        const response = await fetch(`/v1/recipes/save/${recipe_id}`, {
+            method: "DELETE",
+        });
+        if (!response.ok) {
+            throw new Error('Something Wrong!!');
+        }
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+        return Promise.reject(error.message || 'Something Wrong!!');
+    }
+}
+
+
 export const GetMyRecipeService = async () => {
     try {
         const response = await fetch(`/v1/recipes/self`, {
-           
         })
         if (!response.ok) {
             throw new Error('Something Wrong!!')
@@ -30,11 +139,11 @@ export const GetMyRecipeService = async () => {
 export const UpdateMyRecipeService = async (id, form) => {
     try {
         const response = await fetch(`/v1/recipes/${id}`, {
-           method: "PUT",
-           headers: {
+            method: "PUT",
+            headers: {
                 'Content-Type': 'application/json'
-           },
-           body: JSON.stringify(form)
+            },
+            body: JSON.stringify(form)
         })
         if (!response.ok) {
             throw new Error('Something went wrong!!')
@@ -50,7 +159,7 @@ export const UpdateMyRecipeService = async (id, form) => {
 export const DeleteMyRecipeService = async (id) => {
     try {
         const response = await fetch(`/v1/recipes/${id}`, {
-           method: "DELETE",
+            method: "DELETE",
         })
         if (!response.ok) {
             throw new Error('Something Wrong!!')

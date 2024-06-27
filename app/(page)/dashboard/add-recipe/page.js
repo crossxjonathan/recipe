@@ -15,7 +15,8 @@ const AddRecipe = () => {
   const [form, setForm] = useState({
     image: '',
     title: '',
-    description: ''
+    description: '',
+    upload: [],
   });
 
   const Router = useRouter();
@@ -28,14 +29,22 @@ const AddRecipe = () => {
     });
   };
 
+  const handleImageUpload = (imageUrl) => {
+    setForm((prevForm) => ({
+      ...prevForm,
+      image: imageUrl
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { image, title, description } = form;
+      const { image, title, description, upload } = form;
       await AddRecipeService({
         image,
         title,
-        description
+        description,
+        upload,
       });
       toast.success("Recipe added successfully");
       Router.push('/dashboard/profile/my-recipe');
@@ -49,7 +58,7 @@ const AddRecipe = () => {
       <MainHeader />
       <div className="grid justify-center py-10">
         <div className="py-5">
-          <AddPhoto />
+          <AddPhoto onImageUpload={handleImageUpload} />
         </div>
         <form onSubmit={handleSubmit}>
           <input

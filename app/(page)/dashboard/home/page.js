@@ -98,12 +98,12 @@ const MainPage = () => {
         <div className="relative">
           <Image className="w-56 py-3" src={BG} alt="Background" />
           <Image className="w-96 h-96" src={Popular1} alt="Popular Recipe 1" />
-          <h1 className="text-3xl w-5 relative bottom-28 px-5 text-white-cream cursor-pointer hover:text-light-yellow">Pizza Lamoa</h1>
+          <h1 className="text-3xl w-5 relative bottom-28 px-5 text-border cursor-pointer hover:text-light-yellow">Pizza Lamoa</h1>
         </div>
         <div className="relative py-14 px-5">
           <Image className="w-96 h-96" src={Popular2} alt="Popular Recipe 2" />
           <Image className="relative w-56 left-36" src={BG} alt="Background" />
-          <h1 className="text-3xl w-5 relative bottom-36 px-5 text-white-cream cursor-pointer hover:text-light-yellow">King Burger</h1>
+          <h1 className="text-3xl w-5 relative bottom-36 px-5 text-border cursor-pointer hover:text-light-yellow">King Burger</h1>
         </div>
       </div>
 
@@ -119,9 +119,9 @@ const MainPage = () => {
           <Image className="w-112 relative bottom-56 left-28" src={Popular3} alt="Popular Recipe 3" />
         </div>
         <div className="py-56 pr-20">
-          <h1 className="text-4xl text-gray-600 font-medium w-96 py-2">Healthy Bone Broth Ramen (Quick & Easy)</h1>
+          <h1 className="text-4xl text-gray-600 font-medium w-96 py-2">Healthy Vegetable Burger (Quick & Easy)</h1>
           <hr className="border-dark-green border-1 w-20" />
-          <p className="w-96 font-medium py-5 text-gray-500">Quick + Easy Chicken Bone Broth Ramen- Healthy chicken ramen in a hurry? That’s right!</p>
+          <p className="w-96 font-medium py-5 text-gray-500">Quick + Easy Healthy Vegetable Burger- Healthy Vegetable Burger in a hurry? That’s right!</p>
           <Button
             type="button"
             name="Learn More"

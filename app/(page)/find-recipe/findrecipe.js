@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TextField from '@/app/components/base/textfield/textfield';
 import Button from '@/app/components/base/button/button';
 import { Pagination } from 'flowbite-react';
@@ -30,32 +30,28 @@ const FindRecipeClient = ({ initialData, initialTotal, initialSearch, initialPag
         const { data, total } = await GetRecipeService(page, limit, search);
         setData(data);
         setTotal(total);
-    };
-
-    useEffect(() => {
-        fetchData(currentPage, limit, search);
-    }, [currentPage, limit, search]);
-
-    useEffect(() => {
         const results = data.filter(item =>
             item[sortByField].toLowerCase().includes(search.toLowerCase())
         );
         setFilteredData(results);
-    }, [search, sortByField, data]);
+    };
 
     const handleDetailRecipe = (id) => {
         router.push(`/dashboard/detail-recipe/${id}`);
     };
 
-    const handlePageChange = (page) => {
+    const handlePageChange = async (page) => {
         setCurrentPage(page);
+        await fetchData(page, limit, search);
     };
 
-    const handleSearchChange = (e) => {
-        setSearch(e.target.value);
+    const handleSearchChange = async (e) => {
+        const newSearch = e.target.value;
+        setSearch(newSearch);
+        await fetchData(currentPage, limit, newSearch);
     };
 
-    const handleSortChange = (e) => {
+    const handleSortChange = async (e) => {
         const { value } = e.target;
         if (value === "title" || value === "ascending" || value === "descending") {
             if (value === "title") {
@@ -63,6 +59,7 @@ const FindRecipeClient = ({ initialData, initialTotal, initialSearch, initialPag
             } else {
                 setSortType(value);
             }
+            await fetchData(currentPage, limit, search);
         }
     };
 
@@ -110,7 +107,7 @@ const FindRecipeClient = ({ initialData, initialTotal, initialSearch, initialPag
                             {sortedData.length > 0 ? sortedData.map((item) => (
                                 <Card
                                     key={item.id}
-                                    image={ImageDefault}
+                                    image={item.image ? item.image : ImageDefault}
                                     title={item.title}
                                     className="grid-item cursor-pointer"
                                     onClick={() => handleDetailRecipe(item.id)}
