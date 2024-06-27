@@ -1,60 +1,132 @@
-## Recipe Food
+<p align="center">
+  <img src="./public/assets/logo/logo.svg" alt="Logo">
+</p>
 
-This is a Recipe Food Website. So, If You want To find Out a Recipe for Cooking and Sharing Your Recipe Food, You Can Try this, because that's really User Friendly. If You want to use This Code, You can Check this Out!! 
+<h1 align="center">
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=28&pause=1000&color=EFC81A&random=false&width=435&lines=Mama+Recipe+Front+end+Applicaton" alt="Typing SVG" /></a>
+</h1>
 
-## Page List
-- [Home](#homepage)
-- [Landing-Page](#landingpage)
-- [Add-Recipe](#addrecipe)
-- [My-Recipe](#myrecipe)
-- [Save-Recipe](#savedrecipe)
-- [Liked-Recipe](#likedrecipe)
+## Table of Contents
 
-## Feature List
-- [DarkMode](#darkmode)
-- [Responsive-Mobile](#responsivemobile)
-- [Notification](#notification)
+- [Introduction](#introduction)
+- [Tech Stack](#Tech-Stack)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Instalation](#instalation)
+- [Create Environment Variable](#create-environment-variable)
+- [Screenshots](#screenshots)
+- [Release Demo](#Demo)
+- [Related Project](#related-project-backend)
+- [Developed](#Developed-by-the-FWM19-Team)
 
-## Page
-- Landing Page: This is Public route, Before we Sign In we can Look The Main Page in Public
 
-- Home: This is Main Page In Private Route, After we Sign In we can Look The Main Page in Private
 
-- Add Recipe: This is Add Recipe Page, If You want to add some Recipe, You can Make in Here
+## introduction
 
-- My Recipe: This My Recipe In Profile Page, If You Want To Check Your Recipe, You Can Check In Here, And You If You Want To Change Or Update Your Recipe, You Can Do it in Here
+This is a Recipe Food website. If you want to find out a recipe for cooking and sharing your recipe food, you can try this, because that's really user friendly. If you want to use this code, you can check this out!! 
 
-- Save Recipe: This is Save Recipe Page, You can Save Recipe In Your Profile
 
-- Liked Recipe: This is Liked Recipe Page, If You Like Some Recipe, You Can Give Your Like to Some Recipe, and You Can Check in Here What You Liked Recipe
 
-## Getting Started
+## Tech Stack
 
-First, run the development server:
+**Programming language:** JavaScript (Next JS)
+
+**Framework:** Tailwind CSS
+
+**Plugin:** React Icons, React Toastify
+
+[![My Skills](https://skillicons.dev/icons?i=js,html,css,nextjs,npm,tailwind,vscode)](https://skillicons.dev)
+
+
+
+## Features
+
+✨ Users must log in if want to view & search the recipe
+
+✨ User can add their recipes to share to the people
+
+✨ Users can create their recipe, update recipe & delete recipe
+
+✨ Users can like or save their favorite recipe
+
+✨ Users can use dark mode
+
+✨ & etc
+
+
+## Requirements
+
+- [`npm`](https://www.npmjs.com/get-npm)
+- [`next-js`](https://nextjs.org/docs/getting-started/installation)
+- [`next-cli`](https://nextjs.org/docs/pages/api-reference/create-next-app)
+- [`Backend Recipe`](https://github.com/muhammadrisano/pijar-mama-recipe)
+
+
+
+## Instalation
+
+#### Clone this repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+   git clone https://github.com/crossxjonathan/recipe.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Install Depedencies
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+   npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#### Start Project
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-
+```bash
+   npm run dev
+```
 
 
+## Create Environment Variable
 
+If you want to run this environment, you need to add the following environment variables to your .env file
+
+setup server: 
+
+`NEXT_PUBLIC_RECIPE`
+
+
+## Screenshots
+
+<div align="center">
+    <p>Login Page</p>   
+    <img width="250" src="./public/login page.png">   
+    <p>Landing Page & Home Page</p>   
+    <img width="250" src="./public/landingpage.png">   
+</div>
+<div align="center">
+    <p>My Profile</p>   
+    <img width="250" src="./public/my profile.png">
+    <p>Detail Recipe</p>   
+    <img width="250" src="./public/recipe detail.png">   
+</div>
+<div align="center">
+    <p>Find Recipe</p>   
+    <img width="250" src="./public/find recipe.png">
+    <p>Login</p>    
+    <img width="250" src="./public/login page.png">   
+</div>
+
+
+## Release Demo
+- [`Demo`](https://recipe-fwm19.vercel.app/)
+
+
+## Related Project (Backend)
+
+- [`Backend Mama Recipe`](https://github.com/muhammadrisano/pijar-mama-recipe.git)
+
+
+
+## Developed by the FWM19 Team :
+
+💻 [@crossxjonathan](https://github.com/crossxjonathan) as front end
+
+💻 [@muhammadrisano](https://github.com/muhammadrisano) as back end

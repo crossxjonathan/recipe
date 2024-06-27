@@ -42,6 +42,7 @@ const LoginPage = () => {
             const payload = { email, password };
             await LoginService(payload);
             Router.push('/dashboard/profile/my-recipe');
+            toast.success('Welcome!!')
         } catch (error) {
             console.log(error);
             if (error.response) {

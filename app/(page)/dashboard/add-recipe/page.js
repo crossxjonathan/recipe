@@ -58,7 +58,7 @@ const AddRecipe = () => {
       <MainHeader />
       <div className="grid justify-center py-10">
         <div className="py-5">
-          <AddPhoto onImageUpload={handleImageUpload} />
+          {/* <AddPhoto onImageUpload={handleImageUpload} /> */}
         </div>
         <form onSubmit={handleSubmit}>
           <input
