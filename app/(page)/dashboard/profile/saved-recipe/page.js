@@ -4,47 +4,46 @@ import ProfileFooter from '@/app/components/module/footer/profilefooter';
 import MainHeader from '@/app/components/module/header/MainHeader';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import ImageProfile from '../../../../../public/assets/profile/profileimage.svg';
-import EditImg from '../../../../../public/assets/profile/edit-3.svg';
-import BombChicken from '../../../../../public/assets/profile/bomb chicken1.svg';
-import BananasPancake from '../../../../../public/assets/profile/bananas 1.svg';
 import { useRouter } from 'next/navigation';
 import { GetProfile, GetSaveRecipe, cancelSaveRecipe } from '@/services/client/profile';
 import MyProfile from '@/app/components/module/profile/myProfile';
-import { GoBookmarkSlash } from "react-icons/go";
+import { GoBookmarkSlash, GoHeart } from "react-icons/go";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const SavedRecipe = () => {
     const Router = useRouter();
     const [profile, setProfile] = useState([]);
+    const [likedRecipes, setLikedRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-
     const handleSaveRecipe = async () => {
         try {
-          const res = await GetSaveRecipe();
-          setProfile(res.data);
+            const res = await GetSaveRecipe();
+            setProfile(res.data);
         } catch (err) {
-          console.log(err);
-          setError(err.message || 'Failed to fetch liked recipes');
+            console.log(err);
+            setError(err.message || 'Failed to fetch saved recipes');
         } finally {
-          setLoading(false);
+            setLoading(false);
         }
-      };
+    };
 
-    
-      const handleCancelSave = async (id) => {
+    const handleCancelSave = async (id) => {
         try {
-          const res = await cancelSaveRecipe(id);
-          console.log(res, '<<<<<<<<<res');
-          handleSaveRecipe();
+            const res = await cancelSaveRecipe(id);
+            console.log(res, '<<<<<<<<<res');
+            toast.success('Saved has been cancel!!')
+            handleSaveRecipe();
         } catch (error) {
-          console.log(error.message);
+            toast.error('Cancel is failed!!')
+            console.log(error.message);
         }
-      }
+    }
 
     useEffect(() => {
-      handleSaveRecipe()
+        handleSaveRecipe();
     }, [])
 
     return (
@@ -73,33 +72,55 @@ const SavedRecipe = () => {
                 </ul>
             </div>
             <hr />
+            <ToastContainer position='bottom-right' />
             <div className="flex flex-wrap gap-5 px-20 py-10">
-      {loading ? (
+                {loading ? (
                     <div className="flex justify-center items-center">
                         <p>Loading...</p>
                     </div>
                 ) : (
-          profile.map((item) => (
-            <div key={item.id} className="relative">
-              <div className="absolute flex gap-5 top-2 right-2">
-                <GoBookmarkSlash className="cursor-pointer w-10 h-10" onClick={() => handleCancelSave(item.recipe.id)} />
-              </div>
-              <Image
-                className="w-64 h-72 rounded-xl bg-light-yellow object-cover"
-                src={item.recipe.image || defaultImage}
-                width={256}
-                height={288}
-                alt={item.recipe.title}
-              />
-              <p
-                className="absolute bottom-5 left-3 text-2xl text-border font-semibold hover:text-light-yellow cursor-pointer"
-              >
-                {item.recipe.title}
-              </p>
+                    <>
+                        {profile.map((item) => (
+                            <div key={item.id} className="relative">
+                                <div className="absolute flex gap-5 top-2 right-2">
+                                    <GoBookmarkSlash className="cursor-pointer w-10 h-10" onClick={() => handleCancelSave(item.id)} />
+                                </div>
+                                <Image
+                                    className="w-64 h-72 rounded-xl bg-light-yellow object-cover"
+                                    src={item.recipe.image || '/default-image.jpg'}
+                                    width={256}
+                                    height={288}
+                                    alt={item.recipe.title}
+                                />
+                                <p
+                                    className="absolute bottom-5 left-3 text-2xl text-border font-semibold hover:text-light-yellow cursor-pointer"
+                                >
+                                    {item.recipe.title}
+                                </p>
+                            </div>
+                        ))}
+                        {likedRecipes.map((item) => (
+                            <div key={item.id} className="relative">
+                                <div className="absolute flex gap-5 top-2 right-2">
+                                    <GoHeart className="cursor-pointer w-10 h-10" onClick={() => handleCancelLike(item.id)} />
+                                </div>
+                                <Image
+                                    className="w-64 h-72 rounded-xl bg-light-yellow object-cover"
+                                    src={item.recipe.image || '/default-image.jpg'}
+                                    width={256}
+                                    height={288}
+                                    alt={item.recipe.title}
+                                />
+                                <p
+                                    className="absolute bottom-5 left-3 text-2xl text-border font-semibold hover:text-light-yellow cursor-pointer"
+                                >
+                                    {item.recipe.title}
+                                </p>
+                            </div>
+                        ))}
+                    </>
+                )}
             </div>
-          ))
-        )}
-      </div>
             <div>
                 <ProfileFooter />
             </div>
@@ -107,4 +128,4 @@ const SavedRecipe = () => {
     )
 }
 
-export default SavedRecipe
+export default SavedRecipe;
