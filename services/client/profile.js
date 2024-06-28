@@ -48,22 +48,26 @@ export const AddLikeRecipe = async (recipe_id) => {
     }
 };
 
-
 export const cancelLikeRecipe = async (recipe_id) => {
     try {
-        const response = await fetch(`/v1/recipes/like/${recipe_id}`, {
-            method: "DELETE",
-        });
-        if (!response.ok) {
-            throw new Error('Something Wrong!!');
-        }
-        const result = await response.json();
-        return result;
+      const response = await fetch(`/v1/recipes/like/${recipe_id}`, {
+        method: "DELETE",
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Server error:', errorData); 
+        throw new Error(errorData.message || 'Something went wrong!');
+      }
+  
+      const result = await response.json();
+      return result;
     } catch (error) {
-        console.log(error);
-        return Promise.reject(error.message || 'Something Wrong!!');
+      console.error('Fetch error:', error); 
+      return Promise.reject(error.message || 'Something went wrong!');
     }
-}
+  };
+  
 
 export const GetSaveRecipe = async () => {
     try {

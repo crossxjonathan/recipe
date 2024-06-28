@@ -12,6 +12,8 @@ import { GetLikeRecipe, cancelLikeRecipe } from '@/services/client/profile';
 import '../../../Layout.css';
 
 import defaultImage from '../../../../../public/assets/landing page/imagedefault.png';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const LikedRecipe = () => {
   const Router = useRouter();
@@ -35,8 +37,10 @@ const LikedRecipe = () => {
     try {
       const res = await cancelLikeRecipe(id);
       console.log(res, '<<<<<<<<<res');
-      handleLikeProfile();
+      toast.success('Liked has been cancel!!')
+      handleLikeRecipe();
     } catch (error) {
+      toast.error('Cancel is failed!!')
       console.log(error.message);
     }
   }
@@ -74,6 +78,7 @@ const LikedRecipe = () => {
         </ul>
       </div>
       <hr />
+      <ToastContainer position='bottom-right' />
       <div className="flex flex-wrap gap-5 px-20 py-10">
       {loading ? (
                     <div className="flex justify-center items-center">
@@ -83,7 +88,7 @@ const LikedRecipe = () => {
           profile.map((item) => (
             <div key={item.id} className="relative">
               <div className="absolute flex gap-5 top-2 right-2">
-                <IoMdHeartDislike className="cursor-pointer w-10 h-10" onClick={() => handleCancelLike(item.recipe.id)} />
+                <IoMdHeartDislike className="cursor-pointer w-10 h-10" onClick={() => handleCancelLike(item.id)} />
               </div>
               <Image
                 className="w-64 h-72 rounded-xl bg-light-yellow object-cover"
@@ -93,7 +98,7 @@ const LikedRecipe = () => {
                 alt={item.recipe.title}
               />
               <p
-                className="absolute bottom-5 left-3 text-2xl text-border font-semibold hover:text-light-yellow cursor-pointer"
+                className="absolute bottom-5 left-3 text-2xl font-semibold hover:text-light-yellow cursor-pointer text-border"
               >
                 {item.recipe.title}
               </p>
