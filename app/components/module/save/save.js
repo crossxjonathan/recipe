@@ -6,6 +6,7 @@ import Saved from '../../../../public/assets/profile/save.svg';
 import { AddSaveRecipe } from '@/services/client/profile';
 import { toast } from 'react-toastify';
 import { useParams } from 'next/navigation';
+import { IoBookmarks } from "react-icons/io5";
 
 const SaveButton = () => {
     const {id} = useParams();
@@ -22,7 +23,7 @@ const SaveButton = () => {
 
   return (
     <div className='cursor-pointer' onClick={() => handleSaveRecipe(id)}>
-      <Image src={Saved} alt='liked' width={48} height={48} />
+      <IoBookmarks className="w-10 h-10" />
     </div>
   );
 };
