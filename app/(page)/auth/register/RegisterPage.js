@@ -42,12 +42,12 @@ const RegisterPage = () => {
   };
 
   const validateName = (name) => {
-    const nameRegex = /^[A-Za-z]{2,}$/;
+    const nameRegex = /^[A-Za-z\s]{2,}$/;
     return nameRegex.test(name);
   };
 
   const validatePhone = (phone) => {
-    const phoneRegex = /^\d{10}$/;
+    const phoneRegex = /^\d{10,}$/;
     return phoneRegex.test(phone);
   };
 
@@ -72,7 +72,7 @@ const RegisterPage = () => {
     }
 
     if (!validatePhone(phone)) {
-      toast.error('Phone number must be 10 digits long!');
+      toast.error('Phone number must be at least 10 digits long!');
       return;
     }
 
