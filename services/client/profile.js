@@ -1,6 +1,6 @@
 export const GetProfile = async () => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/users/profile`, {
+        const res = await fetch(`/v1/users/profile`, {
             credentials: "include"
         });
         const result = await res.json()
@@ -13,7 +13,7 @@ export const GetProfile = async () => {
 
 export const GetLikeRecipe = async () => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/recipes/like`, {
+        const res = await fetch(`/v1/recipes/like`, {
             credentials: 'include'
         });
         if (!res.ok) {
@@ -29,7 +29,7 @@ export const GetLikeRecipe = async () => {
 
 export const AddLikeRecipe = async (recipe_id) => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/recipes/like`, {
+        const response = await fetch(`/v1/recipes/like`, {
             method: "POST",
             body: JSON.stringify({ recipe_id }),
             headers: {
@@ -50,7 +50,7 @@ export const AddLikeRecipe = async (recipe_id) => {
 
 export const cancelLikeRecipe = async (recipe_id) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/recipes/like/${recipe_id}`, {
+      const response = await fetch(`/v1/recipes/like/${recipe_id}`, {
         method: "DELETE",
       });
   
@@ -71,7 +71,7 @@ export const cancelLikeRecipe = async (recipe_id) => {
 
 export const GetSaveRecipe = async () => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/recipes/save`, {
+        const res = await fetch(`/v1/recipes/save`, {
             credentials: 'include'
         });
         if (!res.ok) {
@@ -88,7 +88,7 @@ export const GetSaveRecipe = async () => {
 
 export const AddSaveRecipe = async (recipe_id) => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/recipes/save`, {
+        const response = await fetch(`/v1/recipes/save`, {
             method: "POST",
             body: JSON.stringify({ recipe_id }),
             headers: {
@@ -110,7 +110,7 @@ export const AddSaveRecipe = async (recipe_id) => {
 
 export const cancelSaveRecipe = async (recipe_id) => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/recipes/save/${recipe_id}`, {
+        const response = await fetch(`/v1/recipes/save/${recipe_id}`, {
             method: "DELETE",
         });
         if (!response.ok) {
@@ -127,7 +127,7 @@ export const cancelSaveRecipe = async (recipe_id) => {
 
 export const GetMyRecipeService = async () => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/recipes/self`, {
+        const response = await fetch(`/v1/recipes/self`, {
         })
         if (!response.ok) {
             throw new Error('Something Wrong!!')
@@ -142,7 +142,7 @@ export const GetMyRecipeService = async () => {
 
 export const UpdateMyRecipeService = async (id, form) => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/recipes/${id}`, {
+        const response = await fetch(`/v1/recipes/${id}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
@@ -162,7 +162,7 @@ export const UpdateMyRecipeService = async (id, form) => {
 
 export const DeleteMyRecipeService = async (id) => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/recipes/${id}`, {
+        const response = await fetch(`/v1/recipes/${id}`, {
             method: "DELETE",
         })
         if (!response.ok) {
@@ -178,7 +178,7 @@ export const DeleteMyRecipeService = async (id) => {
 
 export const UploadMyRecipeService = async (formData) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_RECIPE}/v1/upload`, {
+      const response = await fetch(`/v1/upload`, {
         method: "POST",
         body: formData,
       });
