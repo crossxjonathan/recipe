@@ -6,6 +6,7 @@ import Liked from '../../../../public/assets/profile/like.svg';
 import { AddLikeRecipe } from '@/services/client/profile';
 import { toast } from 'react-toastify';
 import { useParams } from 'next/navigation';
+import { FaHeart } from "react-icons/fa";
 
 
 const LikeButton = () => {
@@ -23,7 +24,7 @@ const LikeButton = () => {
 
   return (
     <div className='px-10 cursor-pointer' onClick={() => handleLikeRecipe(id)}>
-      <Image src={Liked} alt='liked' width={48} height={48} />
+      <FaHeart className="w-10 h-10" />
     </div>
   );
 };

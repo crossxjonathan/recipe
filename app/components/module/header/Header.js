@@ -61,7 +61,7 @@ const Header = () => {
         />
         <button onClick={() => handleNavigation('login', 'Please Wait....', '/auth/login')} className="px-16 py-3 absolute text-light-purple">Login</button>
         <ToastContainer position='bottom-right' />
-        <div className='relative py-2 left-16 z-20'>
+        <div className='relative py-2 left-10 z-20'>
           <ThemeSwitch/>
         </div>
       </div>
