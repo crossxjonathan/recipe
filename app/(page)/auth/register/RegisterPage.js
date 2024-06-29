@@ -31,13 +31,53 @@ const RegisterPage = () => {
     });
   };
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    return passwordRegex.test(password);
+  };
+
+  const validateName = (name) => {
+    const nameRegex = /^[A-Za-z]{2,}$/;
+    return nameRegex.test(name);
+  };
+
+  const validatePhone = (phone) => {
+    const phoneRegex = /^\d{10}$/;
+    return phoneRegex.test(phone);
+  };
+
   const handleFormData = async (e) => {
     e.preventDefault();
-    
+
     const { name, email, phone, password, confirm } = form;
-    
+
     if (!name || !email || !phone || !password || !confirm) {
       toast.error('You must fill in all forms!!!');
+      return;
+    }
+
+    if (!validateName(name)) {
+      toast.error('Name must contain only letters and be at least 2 characters long!');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      toast.error('Invalid email format!');
+      return;
+    }
+
+    if (!validatePhone(phone)) {
+      toast.error('Phone number must be 10 digits long!');
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      toast.error('Password must be at least 6 characters long and contain both letters and numbers!');
       return;
     }
 
@@ -60,7 +100,7 @@ const RegisterPage = () => {
       };
       await RegisterService(payload);
       Router.push('/auth/login');
-      toast.success('Registered Successfull!!')
+      toast.success('Registered Successfully!!');
       setForm({
         name: '',
         email: '',

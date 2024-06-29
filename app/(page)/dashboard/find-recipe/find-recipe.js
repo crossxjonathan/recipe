@@ -77,7 +77,7 @@ const FindRecipeDashboard = ({ initialData, initialTotal, initialSearch, initial
 
     return (
         <div>
-            <div className="flex flex-col md:flex-row gap-3 justify-center">
+            <div id='find-recipe' className="flex flex-col md:flex-row gap-3 justify-center">
                 <div className='flex'>
                     <TextField
                         id="Search"
@@ -86,7 +86,7 @@ const FindRecipeDashboard = ({ initialData, initialTotal, initialSearch, initial
                         placeholder="Find Out Your Recipe"
                         value={search}
                         onChange={handleSearchChange}
-                        className="w-full md:w-80 px-3 h-10 rounded-l border-2"
+                        className="w-full md:w-80 px-3 h-10 rounded-l border-2 search-recipe"
                     />
                 </div>
                 <select
@@ -122,7 +122,7 @@ const FindRecipeDashboard = ({ initialData, initialTotal, initialSearch, initial
                                 <p>No recipes found</p>
                             )}
                         </div>
-                        <div className="flex py-10 overflow-x-auto sm:justify-center">
+                        <div className="flex py-10 overflow-x-auto sm:justify-center pagination-recipe">
                             <Pagination
                                 layout="table"
                                 currentPage={currentPage}

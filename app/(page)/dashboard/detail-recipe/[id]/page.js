@@ -1,71 +1,27 @@
-'use client';
+// 'use client';
 
 import Footer from '@/app/components/module/footer/footer';
 import MainHeader from '@/app/components/module/header/MainHeader';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import VideoBtn from '@/app/components/base/button/videoBtn';
-import TextField from '../../../../components/base/textfield/textfield';
-import Button from '@/app/components/base/button/button';
-import Comment from '../../../../../public/assets/detail recipe/comment.svg';
-import Profile from '../../../../../public/assets/auth/profilepng.png';
-import { useParams } from 'next/navigation';
+// import VideoBtn from '@/app/components/base/button/videoBtn';
+// import TextField from '../../../../components/base/textfield/textfield';
+// import Button from '@/app/components/base/button/button';
+// import Comment from '../../../../../public/assets/detail recipe/comment.svg';
+// import Profile from '../../../../../public/assets/auth/profilepng.png';
+// import { useParams } from 'next/navigation';
 import ImageDefault from '../../../../../public/assets/landing page/imagedefault.png';
 import { GetDetailRecipe } from '@/services/client/recipe';
-import { AddLikeRecipe, AddSaveRecipe } from '@/services/client/profile';
-import Liked from '../../../../../public/assets/profile/like.svg';
-import Saved from '../../../../../public/assets/profile/save.svg';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LikeButton from '@/app/components/module/like/like';
+import SaveButton from '@/app/components/module/save/save';
 
-const DetailRecipe = () => {
-  const [detail, setDetail] = useState(null);
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true);
-  const { id } = useParams();
+const DetailRecipe = async ({params}) => {
+  const result = await GetDetailRecipe(params.id)
+  console.log(result, '<<<<<<<<<result');
 
-  const handleLikeRecipe = async (recipe_id) => {
-    try {
-      const result = await AddLikeRecipe(recipe_id);
-      toast.success('Liked Recipe Success!!🥰')
-      console.log(result, "<<<<<<<<<<<<<<<<<<<result");
-    } catch (error) {
-      toast.error('Already Liked, Check your Like Recipe!!')
-      console.error(error.message);
-    }
-  };
-
-  const handleSaveRecipe = async (recipe_id) => {
-    try {
-      const result = await AddSaveRecipe(recipe_id);
-      toast.success('Saved Recipe Success!!🥰')
-      console.log(result, "<<<<<<<<<<<<<<<<<<<result");
-    } catch (error) {
-      toast.error('Already Saved, Check your Save Recipe!!')
-      console.error(error.message);
-    }
-  };
-
-  useEffect(() => {
-    const fetchRecipe = async () => {
-      try {
-        const res = await GetDetailRecipe(id);
-        setDetail(res && res.data)
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRecipe()
-  }, [id]);
-  console.log(detail, '<<<<<detail')
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  if (!detail) return <div>Recipe Not Found!</div>;
-
-  const { title, image, description } = detail;
+  const { title, description, image, author, id } = result.data;
 
   return (
     <div id='detail-recipe'>
@@ -82,11 +38,11 @@ const DetailRecipe = () => {
             <Image className="bg-light-yellow rounded-xl w-144" width={200} height={200} layout='responsive' src={image ? image : ImageDefault} alt='ImageId' />
           </div>
           <div className='flex flex-1 flex-row justify-center gap-72 py-5'>
-            <div className='px-10 cursor-pointer' onClick={() => handleLikeRecipe(id)}>
-              <Image src={Liked} alt='liked' width={48} height={48} />
+          <div className='px-10'>
+              <LikeButton />
             </div>
-            <div className='px-10 cursor-pointer' onClick={() => handleSaveRecipe(id)}>
-              <Image src={Saved} alt='saved' width={48} height={48} />
+            <div className='px-10'>
+              <SaveButton />
             </div>
           </div>
           <div className="py-5 px-96">
@@ -94,7 +50,10 @@ const DetailRecipe = () => {
             <div className="py-2">
               <p>{description}</p>
             </div>
-            <div className="py-5">
+            <div className='py-5'>
+            <p>Author: {author.name}</p>
+            </div>
+            {/* <div className="py-5">
               <h1 className='text-2xl font-semibold py-5'>Video Step</h1>
               <div className='py-5'>
                 <VideoBtn />
@@ -140,7 +99,7 @@ const DetailRecipe = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

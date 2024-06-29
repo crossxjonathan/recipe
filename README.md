@@ -35,7 +35,7 @@ This is a Recipe Food website. If you want to find out a recipe for cooking and 
 
 **Plugin:** React Icons, React Toastify
 
-[![My Skills](https://skillicons.dev/icons?i=js,html,css,nextjs,npm,tailwind,vscode)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=js,css,nextjs,npm,tailwind,vscode)](https://skillicons.dev)
 
 
 

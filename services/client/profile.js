@@ -178,17 +178,23 @@ export const DeleteMyRecipeService = async (id) => {
 
 export const UploadMyRecipeService = async (formData) => {
     try {
-        const response = await fetch(`/v1/upload`, {
-            method: "POST",
-            body: formData
-        });
-        if (!response.ok) {
-            throw new Error('Something went wrong!');
-        }
-        const result = await response.json();
-        return result;
+      const response = await fetch(`/v1/upload`, {
+        method: "POST",
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        const errorDetails = await response.text();
+        throw new Error(`Error: ${response.status} - ${response.statusText}\nDetails: ${errorDetails}`);
+      }
+  
+      return await response.json();
     } catch (error) {
-        console.error(error);
-        return Promise.reject(error.message || 'Something went wrong!');
+      console.error('Upload error:', error);
+      throw new Error(error.message || 'Something went wrong with upload!');
     }
-};
+  };
+  
+
+
+

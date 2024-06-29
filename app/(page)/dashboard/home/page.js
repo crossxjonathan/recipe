@@ -82,8 +82,8 @@ const MainPage = () => {
             </div>
           </div>
           <div className="relative right-28 z-0">
-            <Image className="relative left-16 w-96 h-96" src={Lettuce} alt="Lettuce" />
-            <Image className="relative w-144 h-144 right-10 bottom-64" src={MainImage} alt="Main Image" />
+            <Image className="first-line relative left-16 w-96 h-96" src={Lettuce} alt="Lettuce" />
+            <Image className="second-line relative w-144 h-144 right-10 bottom-64" src={MainImage} alt="Main Image" />
           </div>
         </div>
       </div>
@@ -118,7 +118,7 @@ const MainPage = () => {
           <div className="flex bg-light-yellow w-80 h-96 relative top-20" />
           <Image className="w-112 relative bottom-56 left-28" src={Popular3} alt="Popular Recipe 3" />
         </div>
-        <div className="py-56 pr-20">
+        <div className="third-line py-56 pr-20">
           <h1 className="text-4xl text-gray-600 font-medium w-96 py-2">Healthy Vegetable Burger (Quick & Easy)</h1>
           <hr className="border-dark-green border-1 w-20" />
           <p className="w-96 font-medium py-5 text-gray-500">Quick + Easy Healthy Vegetable Burger- Healthy Vegetable Burger in a hurry? That’s right!</p>
@@ -131,7 +131,7 @@ const MainPage = () => {
         </div>
       </div>
 
-      <div className="bg-white-cream flex flex-1 flex-row px-28">
+      <div className="bg-white-cream flex flex-1 flex-row px-28 popular-recipe">
         <div className="bg-light-yellow w-5 h-28">
           <h1 className="text-4xl font-semibold py-10 px-10 w-96 text-gray-800">Popular Recipe</h1>
         </div>
@@ -148,7 +148,7 @@ const MainPage = () => {
             />
           ))}
         </div>
-        <div className="flex py-10 overflow-x-auto sm:justify-center">
+        <div className="flex py-10 overflow-x-auto sm:justify-center pagination">
           <Pagination
             layout="table"
             currentPage={currentPage}

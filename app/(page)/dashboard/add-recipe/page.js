@@ -1,22 +1,26 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Footer from '@/app/components/module/footer/footer';
 import MainHeader from '@/app/components/module/header/MainHeader';
-import AddPhoto from '@/app/components/module/gallery/addphoto';
-import AddVideo from '@/app/components/module/gallery/addvideo';
+import Loading from '../../../../public/assets/add recipe/loading cook.gif';
 import Button from '@/app/components/base/button/button';
 import { AddRecipeService } from '@/services/client/recipe';
+import { UploadMyRecipeService } from '@/services/client/profile';
 import '../../Layout.css';
 import { toast } from 'react-toastify';
+import Image from 'next/image';
+import ImageIcon from '../../../../public/assets/add recipe/image icon.svg';
 
 const AddRecipe = () => {
+  const [imageUrl, setImageUrl] = useState(ImageIcon);
+  const [imageDimensions, setImageDimensions] = useState({ width: 100, height: 100 });
+  const fileUploadRef = useRef(null);
   const [form, setForm] = useState({
     image: '',
     title: '',
     description: '',
-    upload: [],
   });
 
   const Router = useRouter();
@@ -25,31 +29,56 @@ const AddRecipe = () => {
     const { name, value } = e.target;
     setForm({
       ...form,
-      [name]: value
+      [name]: value,
     });
   };
 
-  const handleImageUpload = (imageUrl) => {
-    setForm((prevForm) => ({
-      ...prevForm,
-      image: imageUrl
-    }));
+  const handleImageUpload = (e) => {
+    e.preventDefault();
+    fileUploadRef.current.click();
+  };
+
+  const uploadImageDisplay = async (event) => {
+    const uploadedFile = event.target.files[0];
+    console.log(uploadedFile,'<<<<<<<<<<<<<<<uploadedFile');
+    if (!uploadedFile) return;
+
+    try {
+      setImageUrl(Loading);
+      const formData = new FormData();
+      formData.append('file', uploadedFile);
+
+      const response = await UploadMyRecipeService(formData);
+      console.log(response, '<<<<<<<<<<<<<<<<<<response');
+      const imageUrlFromServer = response.data.file_url;
+      console.log(imageUrlFromServer, '<<<<<<<<<<<<<<<<<<imageUrlFromServer');
+
+      const img = new window.Image();
+      img.onload = () => {
+        setImageDimensions({ width: img.width, height: img.height });
+        setImageUrl(imageUrlFromServer);
+        setForm((prevForm) => ({
+          ...prevForm,
+          image: imageUrlFromServer,
+        }));
+      };
+      img.src = imageUrlFromServer;
+    } catch (error) {
+      console.error('Error message:', error.message);
+      setImageUrl(ImageIcon);
+      toast.error('Failed to upload image. Please try again.');
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { image, title, description, upload } = form;
-      await AddRecipeService({
-        image,
-        title,
-        description,
-        upload,
-      });
-      toast.success("Recipe added successfully");
+      const { image, title, description } = form;
+      await AddRecipeService({ image, title, description });
+      toast.success('Recipe added successfully');
       Router.push('/dashboard/profile/my-recipe');
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error('Something went wrong. Please try again.');
     }
   };
 
@@ -57,19 +86,32 @@ const AddRecipe = () => {
     <div>
       <MainHeader />
       <div className="grid justify-center py-10">
-        <div className="py-5">
-          {/* <AddPhoto onImageUpload={handleImageUpload} /> */}
+        <div className="grid bg-white-blue w-full max-w-auto mx-auto h-80 px-80 py-32 cursor-pointer rounded-xl shadow-md">
+          <Image
+            className="w-20 h-20 rounded-xl"
+            width={imageDimensions.width}
+            height={imageDimensions.height}
+            src={imageUrl}
+            alt="Image Icon"
+          />
+          <form id="form" encType="multipart/form-data" className="relative py-3">
+            <button
+              className="text-gray-500 font-semibold"
+              type="button"
+              onClick={handleImageUpload}
+            >
+              Add Photo
+            </button>
+            <input
+              type="file"
+              id="file"
+              ref={fileUploadRef}
+              onChange={uploadImageDisplay}
+              hidden
+            />
+          </form>
         </div>
         <form onSubmit={handleSubmit}>
-          <input
-            id="image"
-            type="text"
-            name="image"
-            value={form.image}
-            placeholder="Image URL"
-            onChange={handleChange}
-            className="shadow-md p-5 px-2 border w-full focus:outline-none focus:ring focus:border-blue-500 ..."
-          />
           <div className="w-full mx-w-auto mx-auto py-5">
             <input
               id="title"
@@ -78,6 +120,7 @@ const AddRecipe = () => {
               value={form.title}
               placeholder="Title"
               onChange={handleChange}
+              maxLength={64}
               className="shadow-md p-5 px-2 border w-full focus:outline-none focus:ring focus:border-blue-500 ..."
             />
           </div>
@@ -90,9 +133,6 @@ const AddRecipe = () => {
               onChange={handleChange}
               className="shadow-md p-5 px-2 border w-full focus:outline-none focus:ring focus:border-blue-500 ... h-56"
             />
-          </div>
-          <div className="py-10">
-            <AddVideo />
           </div>
           <div className="flex justify-center py-5">
             <Button
