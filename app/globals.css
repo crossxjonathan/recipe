@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* img {
+  width: 100%;
+  height: auto;
+  transition: .3s ease all;
+  -webkit-transition: .3s ease all;
+  -moz-transition: .3s ease all;
+  -ms-transition: .3s ease all;
+  -o-transition: .3s ease all;
+}
+
+img:hover {
+  scale: 102%
+} */
 /* 
 :root {
   --foreground-rgb: 0, 0, 0;

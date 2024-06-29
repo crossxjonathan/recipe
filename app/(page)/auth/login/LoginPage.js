@@ -24,17 +24,37 @@ const LoginPage = () => {
         setIsChecked(!isChecked);
     }
 
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    const validatePassword = (password) => {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+        return passwordRegex.test(password);
+    }
+
     const handleFormData = async (e) => {
         e.preventDefault();
 
         if (email === '' || password === '') {
-            setError('All fields are required')
+            setError('All fields are required');
             toast.error('You must fill in all forms!!!');
             return;
         }
 
+        if (!validateEmail(email)) {
+            toast.error('Invalid email format!');
+            return;
+        }
+
+        if (!validatePassword(password)) {
+            toast.error('Password must be at least 6 characters long and contain both letters and numbers!');
+            return;
+        }
+
         if (!isChecked) {
-            toast.info("You must Check The Box!!");
+            toast.info("You must check the box!!");
             return;
         }
 
@@ -42,7 +62,7 @@ const LoginPage = () => {
             const payload = { email, password };
             await LoginService(payload);
             Router.push('/dashboard/profile/my-recipe');
-            toast.success('Welcome!!')
+            toast.success('Welcome!!');
         } catch (error) {
             console.log(error);
             if (error.response) {
@@ -118,4 +138,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage
+export default LoginPage;

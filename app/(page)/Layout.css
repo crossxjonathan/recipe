@@ -209,4 +209,57 @@
     text-align: center;
     padding: 0;
   }
+
+  #landingpage .first-line {
+    top: 350px;
+  }
+
+  #landingpage .second-line {
+    bottom: 50px;
+    left: 50px;
+  }
+
+  #landingpage .bg-popular2 {
+    display: none;
+  }
+
+  #landingpage .third-line {
+    position: relative;
+    top: 250px;
+    right: 250px;
+  }
+
+  #landingpage .popular-recipe {
+    padding-top: 30px;
+  }
+
+  #landingpage .grid-container,
+  #findrecipe .grid-container {
+    grid-template-columns: 1fr; 
+    grid-template-rows: auto;
+    gap: 10px;
+  }
+
+  #landingpage .grid-item,
+  #findrecipe .grid-item {
+    margin-bottom: 20px;
+  }
+
+  #landingpage .pagination {
+    padding-left: 150px;
+  }
+
+  #find-recipe .search-recipe {
+    width: 90%;
+  }
+
+  #sortOptions {
+    width: 90%;
+    position: relative;
+    left: 15px;
+  }
+
+  .pagination-recipe {
+    justify-content: center;
+  }
 }

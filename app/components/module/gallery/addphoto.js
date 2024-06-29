@@ -19,17 +19,17 @@ const AddPhoto = ({ onImageUpload }) => {
     const uploadImageDisplay = async (event) => {
         const uploadedFile = event.target.files[0];
         if (!uploadedFile) return;
-
+    
         try {
             setImageUrl(Loading);
             const formData = new FormData();
             formData.append("file", uploadedFile);
-
+    
             const response = await UploadMyRecipeService(formData);
-
+    
             if (response.status === 201) {
-                const { location: imageUrlFromServer } = await response.json();
-
+                const { location: imageUrlFromServer } = response;
+    
                 const img = new window.Image();
                 img.onload = () => {
                     setImageDimensions({ width: img.width, height: img.height });
@@ -41,10 +41,10 @@ const AddPhoto = ({ onImageUpload }) => {
                 throw new Error('Failed to upload image');
             }
         } catch (error) {
-            console.error(error);
+            console.error(error.message);
             setImageUrl(ImageIcon);
         }
-    };
+    };        
 
     return (
         <div className="grid bg-white-blue w-full max-w-auto mx-auto h-80 px-80 py-32 cursor-pointer rounded-xl">
