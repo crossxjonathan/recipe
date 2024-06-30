@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 'use client';
 import React, { useState, useEffect } from 'react';
 import ImageProfile from '../image profile/image';
@@ -7,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ThemeSwitch from '../../base/darkmode/darkmodetoggle';
 import { useRouter } from 'next/navigation';
 import './header.css';
+import Image from 'next/image';
 
 const Header = () => {
   const [activePage, setActivePage] = useState('');
@@ -55,12 +57,11 @@ const Header = () => {
           </li>
         </ul>
       </div>
-      <div className="flex absolute flex-row right-16 gap-2 LoginGroup">
-        <ImageProfile
-          img={User}
-        />
-        <button onClick={() => handleNavigation('login', 'Please Wait....', '/auth/login')} className="px-16 py-3 absolute text-light-purple">Login</button>
-        <ToastContainer position='bottom-right' />
+      <div className="flex absolute flex-row right-16 gap-1 LoginGroup">
+        <div className="py-1 cursor-pointer">
+        <Image src={User} className="w-10 h-10" onClick={() => handleNavigation('login', 'Please Wait....', '/auth/login')} />
+        </div>
+                <ToastContainer position='bottom-right' />
         <div className='relative py-2 left-10 z-20'>
           <ThemeSwitch/>
         </div>
