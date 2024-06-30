@@ -92,7 +92,11 @@
   }
 
   .LoginGroup {
-    padding-right: 30px;
     top: 30px;
+  }
+
+  .header-container {
+    position: relative;
+    right: 20px;
   }
 }
