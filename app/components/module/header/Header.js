@@ -33,7 +33,7 @@ const Header = () => {
 
   return (
     <header id="header" className="flex flex-row flex-1 px-16 py-10 justify-between font-semibold text-light-purple">
-      <div className="flex flex-row gap-16 header-container">
+      <div className="flex flex-row gap-10 header-container">
         <ul>
           <li>
           <button 
@@ -57,7 +57,7 @@ const Header = () => {
           </li>
         </ul>
       </div>
-      <div className="flex absolute flex-row right-16 gap-1 LoginGroup">
+      <div className="flex absolute flex-row right-10 gap-1 LoginGroup">
         <div className="py-1 cursor-pointer">
         <Image src={User} className="w-10 h-10" onClick={() => handleNavigation('login', 'Please Wait....', '/auth/login')} />
         </div>
