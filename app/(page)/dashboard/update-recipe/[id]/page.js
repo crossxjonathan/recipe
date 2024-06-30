@@ -72,12 +72,16 @@ const UpdateRecipe = ({ params = {} }) => {
                     throw new Error('Failed to fetch data!');
                 }
                 const result = await response.json();
-                console.log(result,'<<<<<<<<<<<<<<<<<<<<result');
+                console.log(result, '<<<<<<<<<<<<<<<<<<<<result');
+                
+                const recipe = result.data;
+                console.log(recipe)
                 setForm({
-                    title: result.title,
-                    description: result.description,
-                    image: result.image
+                    title: recipe.title,
+                    description: recipe.description,
+                    image: recipe.image
                 });
+                setImageUrl(recipe.image)
             } catch (error) {
                 console.log(error);
                 setError('Failed to fetch data!');
@@ -85,13 +89,14 @@ const UpdateRecipe = ({ params = {} }) => {
                 setLoading(false);
             }
         };
-
+    
         if (id) {
             fetchRecipe();
         } else {
             setLoading(false);
         }
     }, [id]);
+    
 
     const handleChange = (e) => {
         const { id, value } = e.target;

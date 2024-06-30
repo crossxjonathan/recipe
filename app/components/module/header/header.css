@@ -98,5 +98,6 @@
   .header-container {
     position: relative;
     right: 20px;
+    z-index: 40;
   }
 }

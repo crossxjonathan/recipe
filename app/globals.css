@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-img {
+/* img {
   width: 100%;
   height: auto;
   transition: .3s ease all;
@@ -15,7 +15,7 @@ img {
 
 img:hover {
   scale: 102%
-}
+} */
 /* 
 :root {
   --foreground-rgb: 0, 0, 0;
