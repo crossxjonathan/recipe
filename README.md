@@ -98,20 +98,26 @@ setup server:
 <div align="center">
     <p>Login Page</p>   
     <img width="250" src="./public/login page.png">   
+    <p>Register Page</p>   
+    <img width="250" src="./public/register page.png">   
     <p>Landing Page & Home Page</p>   
-    <img width="250" src="./public/landingpage.png">   
+    <img width="250" src="./public/Home page.png">   
 </div>
 <div align="center">
-    <p>My Profile</p>   
-    <img width="250" src="./public/my profile.png">
+    <p>My Recipe</p>   
+    <img width="250" src="./public/my recipe.png">
+    <p>Saved Recipe</p>   
+    <img width="250" src="./public/saved recipe.png">
+    <p>Liked Recipe</p>   
+    <img width="250" src="./public/liked recipe.png">
     <p>Detail Recipe</p>   
-    <img width="250" src="./public/recipe detail.png">   
+    <img width="250" src="./public/detail recipe.png">   
 </div>
 <div align="center">
     <p>Find Recipe</p>   
     <img width="250" src="./public/find recipe.png">
-    <p>Login</p>    
-    <img width="250" src="./public/login page.png">   
+    <p>Update Recipe</p>    
+    <img width="250" src="./public/update recipe.png">   
 </div>
 
 
