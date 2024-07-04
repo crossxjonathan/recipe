@@ -141,4 +141,4 @@ setup server:
 
 ## License :
 
--This project is licensed under the MIT License. Please refer to the [LICENSE] file for further details
+-This project is licensed under the MIT License. Please refer to the [LICENSE](./LICENSE) file for further details
