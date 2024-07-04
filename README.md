@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">
-  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=28&pause=1000&color=EFC81A&random=false&width=435&lines=Mama+Recipe+Front+end+Applicaton" alt="Typing SVG" /></a>
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=25&pause=1000&color=EFC81A&random=false&width=435&lines=Mama+Recipe+Front+End+Application" alt="Typing SVG" /></a>
 </h1>
 
 ## Table of Contents
@@ -18,6 +18,7 @@
 - [Release Demo](#Demo)
 - [Related Project](#related-project-backend)
 - [Developed](#Developed-by-the-FWM19-Team)
+- [License](#License)
 
 
 
@@ -136,3 +137,8 @@ setup server:
 💻 [@crossxjonathan](https://github.com/crossxjonathan) as front end
 
 💻 [@muhammadrisano](https://github.com/muhammadrisano) as back end
+
+
+## License :
+
+-This project is licensed under the MIT License. Please refer to the [LICENSE] file for further details
