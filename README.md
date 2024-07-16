@@ -19,6 +19,7 @@
 - [Related Project](#related-project-backend)
 - [Developed](#Developed-by-the-FWM19-Team)
 - [License](#License)
+- [Contact](#Contact)
 
 
 
@@ -142,3 +143,7 @@ setup server:
 ## License :
 
 -This project is licensed under the MIT License. Please refer to the [LICENSE](./LICENSE) file for further details
+
+## Contact :
+📧 firman.jonathan6398@gmail.com
+🔗 https://www.linkedin.com/in/firman-jonathan/
