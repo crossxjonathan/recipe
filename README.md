@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="./public/assets/logo/logo.svg" alt="Logo">
-</p>
+<!--   <img src="./public/assets/logo/logo.svg" alt="Logo">
+</p> -->
 
 <h1 align="center">
   <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=25&pause=1000&color=EFC81A&random=false&width=435&lines=Mama+Recipe+Front+End+Application" alt="Typing SVG" /></a>
