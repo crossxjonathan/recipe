@@ -51,9 +51,7 @@ This is a Recipe Food website. If you want to find out a recipe for cooking and 
 
 ✨ Users can like or save their favorite recipe
 
-✨ Users can use dark mode
-
-✨ & etc
+✨ Users can use dark mode & etc
 
 
 ## Requirements
