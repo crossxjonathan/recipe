@@ -1,0 +1,29 @@
+.text-with-border {
+    font-size: 2em;
+    font-weight: bold;
+    color: black;
+    text-shadow: 
+      1px 1px 0 white,
+      -1px 1px 0 white,
+      1px -1px 0 white,
+      -1px -1px 0 white,
+      2px 2px 0 white,
+      -2px 2px 0 white,
+      2px -2px 0 white,
+      -2px -2px 0 white;
+  }
+
+  .text-border {
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 
+      1px 1px 0 black,
+      -1px 1px 0 black,
+      1px -1px 0 black,
+      -1px -1px 0 black,
+      2px 2px 0 black,
+      -2px 2px 0 black,
+      2px -2px 0 black,
+      -2px -2px 0 black;
+  }

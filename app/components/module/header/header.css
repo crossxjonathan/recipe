@@ -1,0 +1,103 @@
+#header ul li {
+  position: relative;
+  margin-right: 50px;
+}
+
+#header ul li:last-child {
+  margin-right: 0; 
+}
+
+#header ul li button {
+  padding-bottom: 10px;
+}
+
+#header ul li hr {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: none;
+  height: 5px;
+  background-color: #2E266F;
+  margin-top: 5px;
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+#header ul li hr.active {
+  transform: scaleX(1);
+}
+
+#header ul li hr.inactive {
+  transform: scaleX(0);
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 40;
+}
+
+.menu {
+  display: flex;
+}
+
+.menu ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    width: 50%;
+    background-color: #f9f9f9;
+    position: absolute;
+    left: 20px;
+    z-index: 50;
+    border-radius: 10px  ;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+  .menu.open {
+    display: flex;
+    top: 60px;
+  }
+
+  .menu ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .menu ul li {
+    width: 100%;
+    text-align: left;
+  }
+
+  .LoginGroup {
+    top: 30px;
+  }
+
+  .header-container {
+    position: relative;
+    right: 20px;
+    z-index: 40;
+  }
+}
